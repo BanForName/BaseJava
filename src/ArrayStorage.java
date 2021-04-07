@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Array based storage for Resumes
@@ -11,20 +12,29 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-
+        storage[size()] = r;
     }
 
     Resume get(String uuid) {
-        for (Resume resume : storage) {
-            if (resume.uuid.equals(uuid)) return resume;
+        for (int i = 0; i < size(); i++) {
+            if (storage[i].uuid.equals(uuid)) return storage[i];
         }
         return null;
     }
 
     void delete(String uuid) {
-        for (Resume resume : storage) {
-            
+        for (int i = 0; i < size(); i++) {
+            if (storage[i].uuid.equals(uuid)) storage[i] = null;
         }
+        Arrays.sort(storage, new Comparator<Resume>() {
+            @Override
+            public int compare(Resume o1, Resume o2) {
+                if (o1 == null && o2 == null) return 0;
+                if (o1 == null) return 1;
+                if (o2 == null) return -1;
+                return o1.uuid.compareTo(o2.uuid);
+            }
+        });
     }
 
     /**
