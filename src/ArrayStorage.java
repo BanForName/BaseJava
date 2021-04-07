@@ -26,6 +26,7 @@ public class ArrayStorage {
         for (int i = 0; i < size(); i++) {
             if (storage[i].uuid.equals(uuid)) storage[i] = null;
         }
+        
         Arrays.sort(storage, new Comparator<Resume>() {
             @Override
             public int compare(Resume o1, Resume o2) {
@@ -47,7 +48,7 @@ public class ArrayStorage {
     int size() {
         int size = 0;
         for (Resume resume : storage) {
-            if (!(resume == null)) size++;
+            if (resume != null) size++;
         }
         return size;
     }
