@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Array based storage for Resumes
@@ -36,9 +35,7 @@ public class ArrayStorage {
             }
         }
 
-        for (int i = index; i < size; i++) {
-            storage[i] = storage[i + 1];
-        }
+        if (size - index >= 0) System.arraycopy(storage, index + 1, storage, index, size - index);
     }
 
     /**
