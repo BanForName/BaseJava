@@ -4,6 +4,7 @@ import java.util.Comparator;
 /**
  * Array based storage for Resumes
  */
+
 public class ArrayStorage {
     private int size;
     Resume[] storage = new Resume[10000];
