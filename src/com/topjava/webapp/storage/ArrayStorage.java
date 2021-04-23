@@ -13,13 +13,15 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
 
     public void update(Resume resume) {
-        if (checkResume(resume.getUuid())) {
-            int index = getIndex(resume.getUuid());
-            if (resume.getUuid().equals(storage[index])) {
-                storage[index] = resume;
+        String uuid = resume.getUuid();
+        if (checkResume(uuid)) {
+            for (int i = 0; i < size; i++) {
+                if (uuid.equals(storage[i].getUuid())) {
+                    storage[i] = resume;
+                }
             }
         } else {
-            System.out.println(resume.getUuid() + " отсутствует в хранилище");
+            System.out.println(uuid + " отсутствует в хранилище.");
         }
     }
 
@@ -28,11 +30,11 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void save(Resume r) {
-        if (checkResume(r.getUuid())) {
-            System.out.println(r.getUuid() + " уже существует.");
-        } else if (!checkResume(r.getUuid()) && size != storage.length){
-            storage[size] = r;
+    public void save(Resume resume) {
+        if (checkResume(resume.getUuid())) {
+            System.out.println(resume.getUuid() + " уже существует.");
+        } else if (!checkResume(resume.getUuid()) && size != storage.length){
+            storage[size] = resume;
             size++;
         } else {
             System.out.println("Хранилище переполнено.");
@@ -41,8 +43,9 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         if (checkResume(uuid)) {
-            int index = getIndex(uuid);
-            if (storage[index].getUuid().equals(uuid)) return storage[index];
+            for (int i = 0; i < size; i++) {
+                if (uuid.equals(storage[i].getUuid())) return storage[i];
+            }
         } else {
             System.out.println(uuid + " отсутствует в хранилище");
         }
@@ -59,10 +62,7 @@ public class ArrayStorage {
                     break;
                 }
             }
-
-            for (int i = index; i < size; i++) {
-                storage[i] = storage[i + 1];
-            }
+            if (size - index >= 0) System.arraycopy(storage, index + 1, storage, index, size - index);
         } else {
             System.out.println(uuid + " отсутствует в хранилище");
         }
@@ -86,14 +86,5 @@ public class ArrayStorage {
             }
         }
         return false;
-    }
-
-    private int getIndex(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                return i;
-            }
-        }
-        return -1;
     }
 }
