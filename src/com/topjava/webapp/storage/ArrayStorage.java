@@ -16,9 +16,7 @@ public class ArrayStorage {
         String uuid = resume.getUuid();
         int index = getIndex(uuid);
         if (index != -1) {
-            if (uuid.equals(storage[index].getUuid())) {
-                storage[index] = resume;
-            }
+            storage[index] = resume;
         } else {
             System.out.println(uuid + " отсутствует в хранилище.");
         }
@@ -45,7 +43,7 @@ public class ArrayStorage {
     public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index != -1) {
-            if (uuid.equals(storage[index].getUuid())) return storage[index];
+            return storage[index];
         } else {
             System.out.println(uuid + " отсутствует в хранилище");
         }
@@ -55,12 +53,8 @@ public class ArrayStorage {
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index != -1) {
-            int indx = 0;
-                if (storage[index].getUuid().equals(uuid)) {
-                    indx = index;
-                    size--;
-                }
-            if (size - indx >= 0) System.arraycopy(storage, indx + 1, storage, indx, size - indx);
+            size--;
+            if (size - index >= 0) System.arraycopy(storage, index + 1, storage, index, size - index);
         } else {
             System.out.println(uuid + " отсутствует в хранилище");
         }
