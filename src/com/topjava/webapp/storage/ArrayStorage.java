@@ -10,16 +10,14 @@ import java.util.Arrays;
 
 public class ArrayStorage {
     private int size;
-    private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
 
     public void update(Resume resume) {
         String uuid = resume.getUuid();
         int index = getIndex(uuid);
         if (index != -1) {
-            for (int i = 0; i < size; i++) {
-                if (uuid.equals(storage[i].getUuid())) {
-                    storage[i] = resume;
-                }
+            if (uuid.equals(storage[index].getUuid())) {
+                storage[index] = resume;
             }
         } else {
             System.out.println(uuid + " отсутствует в хранилище.");
@@ -47,9 +45,7 @@ public class ArrayStorage {
     public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index != -1) {
-            for (int i = 0; i < size; i++) {
-                if (uuid.equals(storage[i].getUuid())) return storage[i];
-            }
+            if (uuid.equals(storage[index].getUuid())) return storage[index];
         } else {
             System.out.println(uuid + " отсутствует в хранилище");
         }
@@ -60,13 +56,10 @@ public class ArrayStorage {
         int index = getIndex(uuid);
         if (index != -1) {
             int indx = 0;
-            for (int i = 0; i < size; i++) {
-                if (storage[i].getUuid().equals(uuid)) {
-                    indx = i;
+                if (storage[index].getUuid().equals(uuid)) {
+                    indx = index;
                     size--;
-                    break;
                 }
-            }
             if (size - indx >= 0) System.arraycopy(storage, indx + 1, storage, indx, size - indx);
         } else {
             System.out.println(uuid + " отсутствует в хранилище");
