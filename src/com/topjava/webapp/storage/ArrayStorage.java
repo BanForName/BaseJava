@@ -29,10 +29,9 @@ public class ArrayStorage {
 
     public void save(Resume resume) {
         String uuid = resume.getUuid();
-        int index = getIndex(uuid);
-        if (index != -1) {
+        if (getIndex(uuid) != -1) {
             System.out.println(uuid + " уже существует.");
-        } else if (size != storage.length){
+        } else if (size != storage.length) {
             storage[size] = resume;
             size++;
         } else {
@@ -42,11 +41,8 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index != -1) {
-            return storage[index];
-        } else {
-            System.out.println(uuid + " отсутствует в хранилище");
-        }
+        if (index != -1) return storage[index];
+        System.out.println(uuid + " отсутствует в хранилище");
         return null;
     }
 
