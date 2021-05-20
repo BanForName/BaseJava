@@ -8,9 +8,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 
-public class ArrayStorage {
-    private int size;
-    private Resume[] storage = new Resume[10_000];
+public class ArrayStorage extends AbstractArrayStorage {
 
     public void update(Resume resume) {
         String uuid = resume.getUuid();
@@ -30,8 +28,8 @@ public class ArrayStorage {
     public void save(Resume resume) {
         String uuid = resume.getUuid();
         if (getIndex(uuid) != -1) {
-            System.out.println(uuid + " уже существует.");
-        } else if (size != storage.length) {
+            System.out.println(uuid + " уже сущесBтвует.");
+        } else if (size != STORAGE_LIMIT) {
             storage[size] = resume;
             size++;
         } else {
@@ -67,7 +65,7 @@ public class ArrayStorage {
         return size;
     }
 
-    private int getIndex(String uuid) {
+    public int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;
