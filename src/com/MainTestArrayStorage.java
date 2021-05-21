@@ -1,3 +1,5 @@
+package com;
+
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.ArrayStorage;
 
