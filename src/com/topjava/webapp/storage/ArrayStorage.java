@@ -9,18 +9,8 @@ import java.util.Arrays;
  */
 
 public class ArrayStorage extends AbstractArrayStorage {
-    public void save(Resume resume) {
-        String uuid = resume.getUuid();
-        if (getIndex(uuid) != -1) {
-            System.out.println(uuid + " уже существует.");
-        } else if (size != STORAGE_LIMIT) {
-            storage[size] = resume;
-            size++;
-        } else {
-            System.out.println("Хранилище переполнено.");
-        }
-    }
 
+    @Override
     public int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
@@ -28,5 +18,10 @@ public class ArrayStorage extends AbstractArrayStorage {
             }
         }
         return -1;
+    }
+
+    @Override
+    protected void saveResume(Resume resume) {
+        storage[size] = resume;
     }
 }
