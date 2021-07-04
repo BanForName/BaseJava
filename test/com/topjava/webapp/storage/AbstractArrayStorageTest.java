@@ -2,9 +2,7 @@ package com.topjava.webapp.storage;
 
 import com.topjava.webapp.exception.NotExistStorageException;
 import com.topjava.webapp.model.Resume;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public abstract class AbstractArrayStorageTest {
     private Storage storage;
