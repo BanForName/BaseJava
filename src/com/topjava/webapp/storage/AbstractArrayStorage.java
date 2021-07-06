@@ -23,11 +23,8 @@ public abstract class AbstractArrayStorage implements Storage {
     public void update(Resume resume) {
         String uuid = resume.getUuid();
         int index = getIndex(uuid);
-        if (index != -1) {
-            storage[index] = resume;
-        } else {
-            throw new NotExistStorageException(uuid);
-        }
+        if (index < 0) throw new NotExistStorageException(uuid);
+        storage[index] = resume;
     }
 
     @Override
