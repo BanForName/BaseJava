@@ -34,11 +34,6 @@ public abstract class AbstractStorage implements Storage {
         deleteResume(new Resume(uuid), index);
     }
 
-    @Override
-    public Resume[] getAll() {
-        return getAllResume();
-    }
-
     protected abstract void updateResume(Resume resume, int index);
 
     protected abstract void saveResume(Resume resume, int index);
@@ -46,8 +41,6 @@ public abstract class AbstractStorage implements Storage {
     protected abstract Resume getResume(Resume resume, int index);
 
     protected abstract void deleteResume(Resume resume, int index);
-
-    protected abstract Resume[] getAllResume();
 
     protected abstract int getIndex(String uuid);
 }
