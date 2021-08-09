@@ -1,10 +1,10 @@
 package com;
 
 import com.topjava.webapp.model.Resume;
-import com.topjava.webapp.storage.ArrayStorage;
+import com.topjava.webapp.storage.abstractStorage.ArrayStorage;
 
 /**
- * Test for your com.topjava.webapp.storage.ArrayStorage implementation
+ * Test for your com.topjava.webapp.storage.AbstractStorage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();

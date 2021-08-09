@@ -2,6 +2,7 @@ package com;
 
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.abstractStorage.ArrayStorage;
+import com.topjava.webapp.storage.listStorage.ListStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,8 +12,8 @@ import java.io.InputStreamReader;
  * Interactive test for com.topjava.webapp.storage.AbstractStorage.ArrayStorage implementation
  * (just run, no need to understand)
  */
-public class MainArray {
-    private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+public class MainList {
+    private final static ListStorage ARRAY_STORAGE = new ListStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

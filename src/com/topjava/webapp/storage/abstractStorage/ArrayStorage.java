@@ -1,8 +1,6 @@
-package com.topjava.webapp.storage;
+package com.topjava.webapp.storage.abstractStorage;
 
 import com.topjava.webapp.model.Resume;
-
-import java.util.Arrays;
 
 /**
  * Array based storage for Resumes
@@ -21,7 +19,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void saveResume(Resume resume, int index) {
+    public void insertElement(Resume resume, int index) {
         storage[size] = resume;
     }
 }

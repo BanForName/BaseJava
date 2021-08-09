@@ -1,15 +1,14 @@
 package com;
 
 import com.topjava.webapp.model.Resume;
-import com.topjava.webapp.storage.ArrayStorage;
-import com.topjava.webapp.storage.SortedArrayStorage;
+import com.topjava.webapp.storage.abstractStorage.SortedArrayStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for com.topjava.webapp.storage.ArrayStorage implementation
+ * Interactive test for com.topjava.webapp.storage.AbstractStorage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class SortedMainArray {

@@ -12,7 +12,7 @@ public abstract class AbstractArrayStorageTest {
     private final Storage storage;
 
     private static final String UUID_1 = "UUID_1";
-    private Resume resume1 = new Resume(UUID_1);
+    private final Resume resume1 = new Resume(UUID_1);
 
     private static final String UUID_2 = "UUID_2";
     private final Resume resume2 = new Resume(UUID_2);
