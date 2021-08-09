@@ -1,7 +1,7 @@
 package com;
 
 import com.topjava.webapp.model.Resume;
-import com.topjava.webapp.storage.abstractStorage.ArrayStorage;
+import com.topjava.webapp.storage.arrayStorage.ArrayStorage;
 
 /**
  * Test for your com.topjava.webapp.storage.AbstractStorage.ArrayStorage implementation

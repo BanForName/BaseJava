@@ -1,4 +1,4 @@
-package com.topjava.webapp.storage.abstractStorage;
+package com.topjava.webapp.storage.arrayStorage;
 
 import com.topjava.webapp.model.Resume;
 

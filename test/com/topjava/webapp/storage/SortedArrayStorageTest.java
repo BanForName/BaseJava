@@ -1,6 +1,6 @@
 package com.topjava.webapp.storage;
 
-import com.topjava.webapp.storage.abstractStorage.SortedArrayStorage;
+import com.topjava.webapp.storage.arrayStorage.SortedArrayStorage;
 
 public class SortedArrayStorageTest extends AbstractArrayStorageTest {
 

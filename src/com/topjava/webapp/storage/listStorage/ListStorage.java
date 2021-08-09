@@ -3,11 +3,12 @@ package com.topjava.webapp.storage.listStorage;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-    private List<Resume> resumeList = new LinkedList<>();
+    private List<Resume> resumeList = new ArrayList<>();
 
     @Override
     public void clear() {
@@ -20,24 +21,22 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume) {
-        int index = getIndex(resume.getUuid());
+    protected void updateResume(Resume resume, int index) {
         resumeList.set(index, resume);
     }
 
     @Override
-    protected void saveResume(Resume resume) {
+    protected void saveResume(Resume resume, int index) {
         resumeList.add(resume);
     }
 
     @Override
-    protected Resume getResume(Resume resume) {
-        int index = getIndex(resume.getUuid());
+    protected Resume getResume(Resume resume, int index) {
         return resumeList.get(index);
     }
 
     @Override
-    protected void deleteResume(Resume resume) {
+    protected void deleteResume(Resume resume, int index) {
         resumeList.remove(resume);
     }
 

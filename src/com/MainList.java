@@ -1,7 +1,6 @@
 package com;
 
 import com.topjava.webapp.model.Resume;
-import com.topjava.webapp.storage.abstractStorage.ArrayStorage;
 import com.topjava.webapp.storage.listStorage.ListStorage;
 
 import java.io.BufferedReader;
