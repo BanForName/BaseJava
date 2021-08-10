@@ -7,40 +7,54 @@ import com.topjava.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     @Override
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
-        if (index < 0) throw new NotExistStorageException(r.getUuid());
-        updateResume(r, index);
+    public void update(Resume resume) {
+        Object index = notExistResume(resume.getUuid());
+        updateResume(resume, index);
     }
 
     @Override
     public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index >= 0) throw new ExistStorageException(resume.getUuid());
+        Object index = ExistResume(resume.getUuid());
         saveResume(resume, index);
     }
 
     @Override
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) throw new NotExistStorageException(uuid);
+        Object index = notExistResume(uuid);
         return getResume(new Resume(uuid), index);
     }
 
     @Override
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) throw new NotExistStorageException(uuid);
+        Object index = notExistResume(uuid);
         deleteResume(new Resume(uuid), index);
     }
 
-    protected abstract void updateResume(Resume resume, int index);
+    private Object notExistResume(String uuid) {
+        Object key = getKey(uuid);
+        if (!isExist(key)) {
+            throw new NotExistStorageException(uuid);
+        }
+        return key;
+    }
 
-    protected abstract void saveResume(Resume resume, int index);
+    private Object ExistResume(String uuid) {
+        Object key = getKey(uuid);
+        if (isExist(key)) {
+            throw new ExistStorageException(uuid);
+        }
+        return key;
+    }
 
-    protected abstract Resume getResume(Resume resume, int index);
+    protected abstract void updateResume(Resume resume, Object index);
 
-    protected abstract void deleteResume(Resume resume, int index);
+    protected abstract void saveResume(Resume resume, Object index);
 
-    protected abstract int getIndex(String uuid);
+    protected abstract Resume getResume(Resume resume, Object index);
+
+    protected abstract void deleteResume(Resume resume, Object index);
+
+    protected abstract boolean isExist(Object object);
+
+    protected abstract Object getKey(String uuid);
 }
