@@ -21,14 +21,14 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void updateResume(Resume resume, Object index) {
-        storage[(Integer) index] = resume;
+    public void updateResume(Resume resume, Object searchKey) {
+        storage[(int) searchKey] = resume;
     }
 
     @Override
-    public void saveResume(Resume resume, Object index) {
+    public void saveResume(Resume resume, Object searchKey) {
         if (size != STORAGE_LIMIT) {
-            insertElement(resume, (Integer) index);
+            insertElement(resume, (int) searchKey);
             size++;
         } else {
             throw new StorageException("Хранилище переполнено", resume.getUuid());
@@ -36,14 +36,15 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume getResume(Resume resume, Object index) {
-        return storage[(Integer) index];
+    public Resume getResume(Resume resume, Object searchKey) {
+        return storage[(int) searchKey];
     }
 
     @Override
-    public void deleteResume(Resume resume, Object index) {
+    public void deleteResume(Resume resume, Object searchKey) {
+        int indx = (int) searchKey;
         size--;
-        if (size - (Integer) index >= 0) System.arraycopy(storage, (Integer) index + 1, storage, (Integer) index, size - (Integer) index);
+        if (size - indx >= 0) System.arraycopy(storage, indx + 1, storage, indx, size - indx);
     }
 
     @Override
@@ -58,7 +59,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object index) {
-        return (Integer) index >=0;
+        return (int) index >= 0;
     }
 
     protected abstract Object getKey(String uuid);

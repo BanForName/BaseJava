@@ -10,22 +10,22 @@ public class MapStorage extends AbstractStorage {
     private Map<String, Resume> resumeMap = new LinkedHashMap<>();
 
     @Override
-    protected void updateResume(Resume resume, Object index) {
+    protected void updateResume(Resume resume, Object searchKey) {
         resumeMap.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected void saveResume(Resume resume, Object index) {
+    protected void saveResume(Resume resume, Object searchKey) {
         resumeMap.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected Resume getResume(Resume resume, Object index) {
+    protected Resume getResume(Resume resume, Object searchKey) {
         return resumeMap.get(resume.getUuid());
     }
 
     @Override
-    protected void deleteResume(Resume resume, Object index) {
+    protected void deleteResume(Resume resume, Object searchKey) {
         resumeMap.remove(resume.getUuid());
     }
 
