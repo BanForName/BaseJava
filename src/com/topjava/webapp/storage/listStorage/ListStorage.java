@@ -4,7 +4,6 @@ import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
@@ -16,8 +15,8 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return resumeList.toArray(new Resume[size()]);
+    public List<Resume> getAllSorted() {
+        return resumeList;
     }
 
     @Override
@@ -42,12 +41,12 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void deleteResume(Resume resume, Object searchKey) {
-        resumeList.remove(resume);
+        resumeList.remove(((Integer) searchKey).intValue());
     }
 
     @Override
-    protected boolean isExist(Object index) {
-        return index != null;
+    protected boolean isExist(Object searchKey) {
+        return searchKey != null;
     }
 
     @Override

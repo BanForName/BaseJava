@@ -1,12 +1,12 @@
 package com.topjava.webapp.storage.arrayStorage;
 
-import com.topjava.webapp.exception.ExistStorageException;
-import com.topjava.webapp.exception.NotExistStorageException;
 import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
@@ -48,8 +48,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    public List<Resume> getAllSorted() {;
+        return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 
     @Override

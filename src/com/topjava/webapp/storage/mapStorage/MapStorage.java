@@ -3,11 +3,13 @@ package com.topjava.webapp.storage.mapStorage;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
-    private Map<String, Resume> resumeMap = new LinkedHashMap<>();
+    private Map<String, Resume> resumeMap = new HashMap<>();
 
     @Override
     protected void updateResume(Resume resume, Object searchKey) {
@@ -26,7 +28,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void deleteResume(Resume resume, Object searchKey) {
-        resumeMap.remove(resume.getUuid());
+        resumeMap.remove(((Resume) searchKey).getUuid());
     }
 
     @Override
@@ -45,8 +47,9 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return resumeMap.values().toArray(new Resume[0]);
+    public List<Resume> getAllSorted() {
+        List<Resume> list = new ArrayList<>(resumeMap.values());
+        return list;
     }
 
     @Override
