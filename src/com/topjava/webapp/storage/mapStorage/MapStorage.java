@@ -28,17 +28,17 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void deleteResume(Object searchKey) {
-        resumeMap.remove(((Resume) searchKey).getUuid());
+        resumeMap.remove(searchKey);
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return searchKey != null;
+        return resumeMap.containsKey(searchKey);
     }
 
     @Override
-    protected Resume getKey(String searchKey) {
-        return resumeMap.get(searchKey);
+    protected String getKey(String searchKey) {
+        return searchKey;
     }
 
     @Override
