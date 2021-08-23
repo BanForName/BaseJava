@@ -35,12 +35,12 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Resume getResume(Resume resume, Object searchKey) {
+    protected Resume getResume(Object searchKey) {
         return resumeList.get((Integer) searchKey);
     }
 
     @Override
-    protected void deleteResume(Resume resume, Object searchKey) {
+    protected void deleteResume(Object searchKey) {
         resumeList.remove(((Integer) searchKey).intValue());
     }
 

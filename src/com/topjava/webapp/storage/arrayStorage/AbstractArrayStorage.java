@@ -36,12 +36,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume getResume(Resume resume, Object searchKey) {
+    public Resume getResume(Object searchKey) {
         return storage[(int) searchKey];
     }
 
     @Override
-    public void deleteResume(Resume resume, Object searchKey) {
+    public void deleteResume(Object searchKey) {
         int indx = (int) searchKey;
         size--;
         if (size - indx >= 0) System.arraycopy(storage, indx + 1, storage, indx, size - indx);
