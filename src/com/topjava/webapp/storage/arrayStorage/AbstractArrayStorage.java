@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected static final int STORAGE_LIMIT = 10000;
 
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -21,12 +21,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void updateResume(Resume resume, Object searchKey) {
+    public void updateResume(Resume resume, Integer searchKey) {
         storage[(int) searchKey] = resume;
     }
 
     @Override
-    public void saveResume(Resume resume, Object searchKey) {
+    public void saveResume(Resume resume, Integer searchKey) {
         if (size != STORAGE_LIMIT) {
             insertElement(resume, (int) searchKey);
             size++;
@@ -36,12 +36,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume getResume(Object searchKey) {
+    public Resume getResume(Integer searchKey) {
         return storage[(int) searchKey];
     }
 
     @Override
-    public void deleteResume(Object searchKey) {
+    public void deleteResume(Integer searchKey) {
         int indx = (int) searchKey;
         size--;
         if (size - indx >= 0) System.arraycopy(storage, indx + 1, storage, indx, size - indx);
@@ -58,11 +58,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean isExist(Object index) {
+    protected boolean isExist(Integer index) {
         return (int) index >= 0;
     }
 
-    protected abstract Object getKey(String uuid);
+    protected abstract Integer getKey(String uuid);
 
     protected abstract void insertElement(Resume resume, int index);
 }

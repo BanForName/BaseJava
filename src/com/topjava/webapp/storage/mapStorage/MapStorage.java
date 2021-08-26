@@ -8,31 +8,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapStorage extends AbstractStorage {
+public class MapStorage extends AbstractStorage<String> {
     private Map<String, Resume> resumeMap = new HashMap<>();
 
     @Override
-    protected void updateResume(Resume resume, Object searchKey) {
+    protected void updateResume(Resume resume, String searchKey) {
         resumeMap.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected void saveResume(Resume resume, Object searchKey) {
+    protected void saveResume(Resume resume, String searchKey) {
         resumeMap.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected Resume getResume(Object searchKey) {
+    protected Resume getResume(String searchKey) {
         return resumeMap.get(searchKey);
     }
 
     @Override
-    protected void deleteResume(Object searchKey) {
+    protected void deleteResume(String searchKey) {
         resumeMap.remove(searchKey);
     }
 
     @Override
-    protected boolean isExist(Object searchKey) {
+    protected boolean isExist(String searchKey) {
         return resumeMap.containsKey(searchKey);
     }
 
@@ -48,8 +48,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public List<Resume> getAllSorted() {
-        List<Resume> list = new ArrayList<>(resumeMap.values());
-        return list;
+        return new ArrayList<>(resumeMap.values());
     }
 
     @Override
