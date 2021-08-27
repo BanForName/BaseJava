@@ -5,12 +5,12 @@ public enum SectionType {
     OBJECTIVE("Позиция"),
     ACHIEVEMENT("Достижения"),
     QUALIFICATIONS("Квалификация"),
-    EXPERIENCE("Опыт раьботы"),
+    EXPERIENCE("Опыт работы"),
     EDUCATION("Образование");
 
     private String title;
 
-    SectionType(String title) {
+    private SectionType(String title) {
         this.title = title;
     }
 
