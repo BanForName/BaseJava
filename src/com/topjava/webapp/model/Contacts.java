@@ -1,22 +1,21 @@
 package com.topjava.webapp.model;
 
-public class Contacts {
-    private String name;
-    private String text;
+public enum Contacts {
+    PHONE("Телефон"),
+    SKYPE("SKYPE"),
+    EMAIL("Эл/почта"),
+    LINKEDIN("Профиль Linkedin"),
+    GITHUB("Профиль Github"),
+    STACKOVERFLOW("Профиль Stackoverflow"),
+    HOMEPAGE("Домашняя страница");
 
-    public String getName() {
-        return name;
+    private String title;
+
+    Contacts(String title) {
+        this.title = title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    public String getTitle() {
+        return title;
     }
 }
