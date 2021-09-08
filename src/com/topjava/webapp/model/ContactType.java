@@ -1,6 +1,6 @@
 package com.topjava.webapp.model;
 
-public enum Contacts {
+public enum ContactType {
     PHONE("Телефон"),
     SKYPE("SKYPE"),
     EMAIL("Эл/почта"),
@@ -11,7 +11,7 @@ public enum Contacts {
 
     private String title;
 
-    Contacts(String title) {
+    ContactType(String title) {
         this.title = title;
     }
 

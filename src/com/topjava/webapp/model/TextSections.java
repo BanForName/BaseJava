@@ -1,13 +1,16 @@
 package com.topjava.webapp.model;
 
-public class TextSections {
+import java.util.Objects;
+
+public class TextSections extends Sections {
     private String text;
+
+    public TextSections(String text) {
+        Objects.requireNonNull("text must be not null");
+        this.text = text;
+    }
 
     public String getText() {
         return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }
