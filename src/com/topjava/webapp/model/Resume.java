@@ -36,12 +36,28 @@ public class Resume implements Comparable<Resume> {
         return fullName;
     }
 
-    public Sections getSections(SectionType type) {
-        return sections.get(type);
+    public Map<SectionType, Sections> getSections() {
+        return sections;
     }
 
     public Map<ContactType, String> getContacts() {
         return contacts;
+    }
+
+    public Sections getSection(SectionType type) {
+        return sections.get(type);
+    }
+
+    public void setSection(SectionType type, Sections section) {
+        sections.put(type, section);
+    }
+
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public void setContact(ContactType type, String contact) {
+        contacts.put(type, contact);
     }
 
     @Override

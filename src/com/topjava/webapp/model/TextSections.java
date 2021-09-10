@@ -13,4 +13,9 @@ public class TextSections extends Sections {
     public String getText() {
         return text;
     }
+
+    @Override
+    public String toString() {
+        return text + "\n";
+    }
 }

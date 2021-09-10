@@ -2,7 +2,7 @@ package com.topjava.webapp.model;
 
 import java.time.LocalDate;
 
-public class SkillsSections {
+public class SkillsSections extends Sections{
     private String link;
     private LocalDate startDate;
     private LocalDate endDate;
