@@ -15,4 +15,9 @@ public class ListSections extends Sections {
     public List<String> getList() {
         return list;
     }
+
+    @Override
+    public String toString() {
+        return list.toString();
+    }
 }

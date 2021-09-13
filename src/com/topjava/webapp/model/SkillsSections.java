@@ -1,40 +1,22 @@
 package com.topjava.webapp.model;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkillsSections extends Sections{
-    private String link;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String title;
-    private String text;
+    private List<Sections> sectionsList = new ArrayList<>();
 
-    public SkillsSections(String link, LocalDate startDate, LocalDate endDate, String title, String text) {
-        this.link = link;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.title = title;
-        this.text = text;
+    public SkillsSections(List<Sections> sectionsList) {
+        this.sectionsList = sectionsList;
     }
 
-    public String getLink() {
-        return link;
+    public List<Sections> getSectionsList() {
+        return sectionsList;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getText() {
-        return text;
+    @Override
+    public String toString() {
+        return sectionsList.toString();
     }
 }
 

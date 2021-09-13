@@ -16,6 +16,6 @@ public class TextSections extends Sections {
 
     @Override
     public String toString() {
-        return text + "\n";
+        return text;
     }
 }
