@@ -3,7 +3,7 @@ package com.topjava.webapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillsSections extends Sections{
+public class SkillsSections extends Sections {
     private List<Sections> sectionsList = new ArrayList<>();
 
     public SkillsSections(List<Sections> sectionsList) {
