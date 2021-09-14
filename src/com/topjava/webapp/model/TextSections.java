@@ -2,7 +2,7 @@ package com.topjava.webapp.model;
 
 import java.util.Objects;
 
-public class TextSections extends Sections {
+public class TextSections extends AbstractSection {
     private String text;
 
     public TextSections(String text) {

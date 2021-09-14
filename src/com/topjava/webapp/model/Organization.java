@@ -3,14 +3,14 @@ package com.topjava.webapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillsSections extends Sections {
-    private List<Sections> sectionsList = new ArrayList<>();
+public class Organization extends AbstractSection {
+    private List<Experience> sectionsList = new ArrayList<>();
 
-    public SkillsSections(List<Sections> sectionsList) {
+    public Organization(List<Experience> sectionsList) {
         this.sectionsList = sectionsList;
     }
 
-    public List<Sections> getSectionsList() {
+    public List<Experience> getSectionsList() {
         return sectionsList;
     }
 

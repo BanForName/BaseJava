@@ -37,35 +37,35 @@ public class ResumeTestData {
         qualifList.add("MySQL, SQLite, MS SQL, HSQLDB");
         resume.setSection(SectionType.QUALIFICATIONS, new ListSections(qualifList));
 
-        List<Sections> experienceList = new ArrayList<>();
-        experienceList.add(new Skills(new Link(
+        List<Experience> experienceList = new ArrayList<>();
+        experienceList.add(new Experience(new Link(
                 "Java Online Projects", "https://javaops.ru/"),
                 LocalDate.of(2013, 10, 01),
                 LocalDate.now(),
                 "Автор проекта",
                 "Создание, организация и проведение Java онлайн проектов и стажировок."));
-        experienceList.add(new Skills(new Link(
+        experienceList.add(new Experience(new Link(
                 "Wrike", "https://www.wrike.com/"),
                 LocalDate.of(2014, 10, 01),
                 LocalDate.of(2016, 01, 01),
                 "Старший разработчик (backend)",
                 "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."));
-        resume.setSection(SectionType.EXPERIENCE, new SkillsSections(experienceList));
+        resume.setSection(SectionType.EXPERIENCE, new Organization(experienceList));
 
-        List<Sections> educationList = new ArrayList<>();
-        educationList.add(new Skills(new Link(
+        List<Experience> educationList = new ArrayList<>();
+        educationList.add(new Experience(new Link(
                 "Coursera", "https://www.coursera.org/learn/scala-functional-programming"),
                 LocalDate.of(2013, 03, 01),
                 LocalDate.of(2013, 05, 01),
                 "\"Functional Programming Principles in Scala\" by Martin Odersky",
                 ""));
-        educationList.add(new Skills(new Link(
+        educationList.add(new Experience(new Link(
                 "Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
                 LocalDate.of(2011, 03, 01),
                 LocalDate.of(2011, 04, 01),
                 "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.",
                 ""));
-        resume.setSection(SectionType.EDUCATION, new SkillsSections(educationList));
+        resume.setSection(SectionType.EDUCATION, new Organization(educationList));
 
         System.out.println(resume);
         System.out.println(resume.getContacts());
