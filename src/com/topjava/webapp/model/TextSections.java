@@ -3,10 +3,10 @@ package com.topjava.webapp.model;
 import java.util.Objects;
 
 public class TextSections extends AbstractSection {
-    private String text;
+    private final String text;
 
     public TextSections(String text) {
-        Objects.requireNonNull("text must be not null");
+        Objects.requireNonNull(text, "text must be not null");
         this.text = text;
     }
 
@@ -17,5 +17,18 @@ public class TextSections extends AbstractSection {
     @Override
     public String toString() {
         return text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TextSections that = (TextSections) o;
+        return text.equals(that.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(text);
     }
 }

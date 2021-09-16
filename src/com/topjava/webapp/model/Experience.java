@@ -1,15 +1,20 @@
 package com.topjava.webapp.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Experience extends AbstractSection {
-    private Link link;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String title;
-    private String text;
+    private final Link link;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final String title;
+    private final String text;
 
     public Experience(Link link, LocalDate startDate, LocalDate endDate, String title, String text) {
+        Objects.requireNonNull(link, "Link must be not null");
+        Objects.requireNonNull(startDate, "startDate must be not null");
+        Objects.requireNonNull(endDate, "endDate must not be null");
+        Objects.requireNonNull(title, "title must be not null");
         this.link = link;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -38,7 +43,20 @@ public class Experience extends AbstractSection {
     }
 
     @Override
-    public String toString() {
+    public String toString()  {
         return link + "\n" + startDate + " - " + endDate + "  " + title + "\n" + text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Experience that = (Experience) o;
+        return link.equals(that.link) && startDate.equals(that.startDate) && endDate.equals(that.endDate) && title.equals(that.title) && Objects.equals(text, that.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(link, startDate, endDate, title, text);
     }
 }
