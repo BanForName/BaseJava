@@ -8,7 +8,7 @@ public class Organization extends AbstractSection {
     private List<Experience> sectionsList = new ArrayList<>();
 
     public Organization(List<Experience> sectionsList) {
-        Objects.requireNonNull(sectionsList, "SectionList must be not null");
+        Objects.requireNonNull(sectionsList, " must be not null");
         this.sectionsList = sectionsList;
     }
 

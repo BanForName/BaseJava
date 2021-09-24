@@ -24,7 +24,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void updateResume(Resume resume, File file) {
-
+        
     }
 
     @Override

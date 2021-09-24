@@ -1,6 +1,7 @@
 package com.topjava.webapp.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class Experience extends AbstractSection {
@@ -11,10 +12,10 @@ public class Experience extends AbstractSection {
     private final String text;
 
     public Experience(Link link, LocalDate startDate, LocalDate endDate, String title, String text) {
-        Objects.requireNonNull(link, "Link must be not null");
-        Objects.requireNonNull(startDate, "startDate must be not null");
-        Objects.requireNonNull(endDate, "endDate must not be null");
-        Objects.requireNonNull(title, "title must be not null");
+        Objects.requireNonNull(link, " must be not null");
+        Objects.requireNonNull(startDate, " must be not null");
+        Objects.requireNonNull(endDate, " must not be null");
+        Objects.requireNonNull(title, " must be not null");
         this.link = link;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,7 +44,7 @@ public class Experience extends AbstractSection {
     }
 
     @Override
-    public String toString()  {
+    public String toString() {
         return link + "\n" + startDate + " - " + endDate + "  " + title + "\n" + text;
     }
 
