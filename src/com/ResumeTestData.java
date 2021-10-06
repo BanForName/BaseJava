@@ -1,13 +1,10 @@
 package com;
 
 import com.topjava.webapp.model.*;
-import com.topjava.webapp.util.DateUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.time.LocalTime.of;
 
 public class ResumeTestData {
     public static void main(String[] args) {
@@ -39,33 +36,20 @@ public class ResumeTestData {
         resume.setSection(SectionType.QUALIFICATIONS, new ListSections(qualifList));
 
         List<Experience> experienceList = new ArrayList<>();
-        experienceList.add(new Experience(new Link(
-                "Java Online Projects", "https://javaops.ru/"),
-                LocalDate.of(2013, 10, 01),
-                LocalDate.now(),
-                "Автор проекта",
-                "Создание, организация и проведение Java онлайн проектов и стажировок."));
-        experienceList.add(new Experience(new Link(
-                "Wrike", "https://www.wrike.com/"),
-                LocalDate.of(2014, 10, 01),
-                LocalDate.of(2016, 01, 01),
-                "Старший разработчик (backend)",
-                "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."));
+        experienceList.add(new Experience(new Link("Java Online Projects", "https://javaops.ru/"),
+                new Experience.ListExp(LocalDate.of(2013, 10, 01), LocalDate.now(), "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок.")));
+        experienceList.add(new Experience(new Link("Java Online Projects", "https://javaops.ru/"),
+                new Experience.ListExp(LocalDate.of(2010, 1, 01), LocalDate.of(2011, 9, 01), "Директор", "Управлние")));
+        experienceList.add(new Experience(new Link("Wrike", "https://www.wrike.com/"),
+                new Experience.ListExp(LocalDate.of(2014, 10, 01), LocalDate.of(2016, 01, 01), "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")));
         resume.setSection(SectionType.EXPERIENCE, new Organization(experienceList));
 
         List<Experience> educationList = new ArrayList<>();
-        educationList.add(new Experience(new Link(
-                "Coursera", "https://www.coursera.org/learn/scala-functional-programming"),
-                LocalDate.of(2013, 03, 01),
-                LocalDate.of(2013, 05, 01),
-                "\"Functional Programming Principles in Scala\" by Martin Odersky",
-                ""));
-        educationList.add(new Experience(new Link(
-                "Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
-                LocalDate.of(2011, 03, 01),
-                LocalDate.of(2011, 04, 01),
-                "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.",
-                ""));
+        educationList.add(new Experience(new Link("Coursera", "https://www.coursera.org/learn/scala-functional-programming"),
+                new Experience.ListExp(LocalDate.of(2013, 03, 01), LocalDate.of(2013, 05, 01), "\"Functional Programming Principles in Scala\" by Martin Odersky", "")));
+        educationList.add(new Experience(new Link("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
+                new Experience.ListExp(LocalDate.of(2011, 03, 01), LocalDate.of(2011, 04, 01), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", ""),
+                new Experience.ListExp(LocalDate.of(2016, 12, 01), LocalDate.now(), "Tester", "Hello world")));
         resume.setSection(SectionType.EDUCATION, new Organization(educationList));
 
         System.out.println(resume);
