@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Experience extends AbstractSection {
     private final Link link;
-    private List<ListExp> listExp = new ArrayList<>();
+    private List<ListExp> listExp;
 
     public Experience(Link link, ListExp... listExp) {
         Objects.requireNonNull(link, " must be not null");
@@ -32,10 +32,8 @@ public class Experience extends AbstractSection {
 
         Experience that = (Experience) o;
 
-        if (link != null ? !link.equals(that.link) : that.link != null) return false;
-        if (listExp != null ? !listExp.equals(that.listExp) : that.listExp != null) return false;
-
-        return true;
+        if (!Objects.equals(link, that.link)) return false;
+        return Objects.equals(listExp, that.listExp);
     }
 
     @Override
@@ -89,12 +87,10 @@ public class Experience extends AbstractSection {
 
             ListExp listExp = (ListExp) o;
 
-            if (startDate != null ? !startDate.equals(listExp.startDate) : listExp.startDate != null) return false;
-            if (endDate != null ? !endDate.equals(listExp.endDate) : listExp.endDate != null) return false;
-            if (title != null ? !title.equals(listExp.title) : listExp.title != null) return false;
-            if (!text.equals(listExp.text)) return false;
-
-            return true;
+            if (!Objects.equals(startDate, listExp.startDate)) return false;
+            if (!Objects.equals(endDate, listExp.endDate)) return false;
+            if (!Objects.equals(title, listExp.title)) return false;
+            return text.equals(listExp.text);
         }
 
         @Override
