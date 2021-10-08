@@ -1,5 +1,6 @@
 package com.topjava.webapp.storage;
 
+import com.topjava.webapp.ResumeTestData;
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
 import com.topjava.webapp.model.Resume;
@@ -9,18 +10,19 @@ import org.junit.Test;
 
 public abstract class AbstractStorageTest {
     protected final Storage storage;
+    protected final ResumeTestData testResume = new ResumeTestData();
 
     private static final String UUID_1 = "UUID_1";
-    private final Resume resume1 = new Resume(UUID_1, "Bob");
+    private final Resume resume1 = testResume.createResume(UUID_1, "Bob");
 
     private static final String UUID_2 = "UUID_2";
-    private final Resume resume2 = new Resume(UUID_2, "Tom");
+    private final Resume resume2 = testResume.createResume(UUID_2, "Tom");
 
     private static final String UUID_3 = "UUID_3";
-    private final Resume resume3 = new Resume(UUID_3, "John");
+    private final Resume resume3 = testResume.createResume(UUID_3, "John");
 
     private static final String UUID_4 = "UUID_4";
-    private final Resume resume4 = new Resume(UUID_4, "Robert");
+    private final Resume resume4 = testResume.createResume(UUID_4, "Robert");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;

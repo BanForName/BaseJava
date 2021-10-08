@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 import com.topjava.webapp.model.*;
 
@@ -7,12 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResumeTestData {
-    public static void main(String[] args) {
-        ResumeTestData testData = new ResumeTestData();
-        testData.createResume("1", "Григорий Кислин");
-    }
-
-    private Resume createResume(String uuid, String fullName) {
+    public Resume createResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
         resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
         resume.setContact(ContactType.SKYPE, "grigory.kislin");
@@ -53,7 +48,8 @@ public class ResumeTestData {
                 new Experience.ListExp(LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1), "\"Functional Programming Principles in Scala\" by Martin Odersky", "")));
         educationList.add(new Experience(new Link("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
                 new Experience.ListExp(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", ""),
-                new Experience.ListExp(LocalDate.of(2016, 12, 1), LocalDate.now(), "Tester", "Hello world")));
+                new Experience.ListExp(LocalDate.of(2016, 12, 1), LocalDate.now(), "Tester", "Hello world"),
+                new Experience.ListExp(LocalDate.of(2015, 4, 13), LocalDate.of(2015, 6, 29), "Manager", "buying/selling")));
         resume.setSection(SectionType.EDUCATION, new Organization(educationList));
 
         System.out.println(resume);
