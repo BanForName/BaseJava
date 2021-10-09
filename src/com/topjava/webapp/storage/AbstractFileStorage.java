@@ -5,6 +5,8 @@ import com.topjava.webapp.model.Resume;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +26,11 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void updateResume(Resume resume, File file) {
-        
+        try {
+            resumeWrite(resume, file);
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
     }
 
     @Override
@@ -37,11 +43,15 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         }
     }
 
-    protected abstract void resumeWrite(Resume resume, File file) throws  IOException;
-
     @Override
     protected Resume getResume(File file) {
-        return null;
+        Resume resume;
+        try {
+            resume = resumeRead(file);
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
+        return resume;
     }
 
     @Override
@@ -61,15 +71,31 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public void clear() {
+        File[] folder = directory.listFiles();
+        for (File entry : Objects.requireNonNull(folder)) {
+            entry.delete();
+        }
     }
 
     @Override
     public List<Resume> getAllSorted() {
-        return null;
+        List<Resume> list = new LinkedList<>();
+        for (File files : Objects.requireNonNull(directory.listFiles())) {
+            try {
+                list.add(resumeRead(files));
+            } catch (IOException e) {
+                throw new StorageException("IO error", files.getName(), e);
+            }
+        }
+        return list;
     }
 
     @Override
     public int size() {
-        return 0;
+        return Objects.requireNonNull(directory.listFiles()).length;
     }
+
+    protected abstract void resumeWrite(Resume resume, File file) throws IOException;
+
+    protected abstract Resume resumeRead(File file) throws IOException;
 }
