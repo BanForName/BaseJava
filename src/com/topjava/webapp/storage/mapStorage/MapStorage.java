@@ -6,7 +6,7 @@ import com.topjava.webapp.storage.AbstractStorage;
 import java.util.*;
 
 public class MapStorage extends AbstractStorage<String> {
-    private Map<String, Resume> resumeMap = new TreeMap<>();
+    private Map<String, Resume> resumeMap = new LinkedHashMap<>();
 
     @Override
     protected void updateResume(Resume resume, String searchKey) {
