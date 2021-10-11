@@ -4,7 +4,6 @@ import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

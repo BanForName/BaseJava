@@ -28,18 +28,14 @@ public class Organization {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Organization that = (Organization) o;
-
-        if (!Objects.equals(link, that.link)) return false;
-        return Objects.equals(exp, that.exp);
+        return Objects.equals(link, that.link) &&
+                Objects.equals(exp, that.exp);
     }
 
     @Override
     public int hashCode() {
-        int result = link != null ? link.hashCode() : 0;
-        result = 31 * result + (exp != null ? exp.hashCode() : 0);
-        return result;
+        return Objects.hash(link, exp);
     }
 
     public static class Experience {
@@ -83,22 +79,16 @@ public class Organization {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
-            Experience listExp = (Experience) o;
-
-            if (!Objects.equals(startDate, listExp.startDate)) return false;
-            if (!Objects.equals(endDate, listExp.endDate)) return false;
-            if (!Objects.equals(title, listExp.title)) return false;
-            return text.equals(listExp.text);
+            Experience that = (Experience) o;
+            return Objects.equals(startDate, that.startDate) &&
+                    Objects.equals(endDate, that.endDate) &&
+                    Objects.equals(title, that.title) &&
+                    text.equals(that.text);
         }
 
         @Override
         public int hashCode() {
-            int result = startDate != null ? startDate.hashCode() : 0;
-            result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-            result = 31 * result + (title != null ? title.hashCode() : 0);
-            result = 31 * result + text.hashCode();
-            return result;
+            return Objects.hash(startDate, endDate, title, text);
         }
     }
 }

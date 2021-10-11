@@ -3,13 +3,10 @@ package com.topjava.webapp.storage.mapStorage;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MapResumeStorage extends AbstractStorage<Resume> {
-    private Map<String, Resume> resumeMap = new HashMap<>();
+    private Map<String, Resume> resumeMap = new TreeMap<>();
 
     @Override
     protected void updateResume(Resume resume, Resume searchKey) {

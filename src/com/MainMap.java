@@ -1,7 +1,6 @@
 package com;
 
 import com.topjava.webapp.model.Resume;
-import com.topjava.webapp.storage.listStorage.ListStorage;
 import com.topjava.webapp.storage.mapStorage.MapStorage;
 
 import java.io.BufferedReader;

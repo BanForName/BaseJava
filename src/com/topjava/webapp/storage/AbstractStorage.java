@@ -4,7 +4,6 @@ import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
 import com.topjava.webapp.model.Resume;
 
-import java.io.*;
 import java.util.logging.Logger;
 
 public abstract class AbstractStorage<T> implements Storage {

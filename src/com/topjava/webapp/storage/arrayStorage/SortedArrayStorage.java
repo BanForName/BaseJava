@@ -3,7 +3,6 @@ package com.topjava.webapp.storage.arrayStorage;
 import com.topjava.webapp.model.Resume;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
