@@ -8,21 +8,24 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class AbstractStorageTest {
     protected final Storage storage;
-    protected final ResumeTestData testResume = new ResumeTestData();
 
     private static final String UUID_1 = "UUID_1";
-    private final Resume resume1 = testResume.createResume(UUID_1, "Bob");
+    private final Resume resume1 = ResumeTestData.createResume(UUID_1, "Bob");
 
     private static final String UUID_2 = "UUID_2";
-    private final Resume resume2 = testResume.createResume(UUID_2, "Tom");
+    private final Resume resume2 = ResumeTestData.createResume(UUID_2, "Tom");
 
     private static final String UUID_3 = "UUID_3";
-    private final Resume resume3 = testResume.createResume(UUID_3, "John");
+    private final Resume resume3 = ResumeTestData.createResume(UUID_3, "John");
 
     private static final String UUID_4 = "UUID_4";
-    private final Resume resume4 = testResume.createResume(UUID_4, "Robert");
+    private final Resume resume4 = ResumeTestData.createResume(UUID_4, "Robert");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -85,9 +88,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() {
-        Resume[] resumes = new Resume[]{resume1, resume2, resume3};
-        Resume[] allResume = storage.getAllSorted().toArray(resumes);
-        Assert.assertArrayEquals(resumes, allResume);
+        List<Resume> resumes = new ArrayList<>(Arrays.asList(resume1, resume2, resume3));
+        List<Resume> allResume = storage.getAllSorted();
+        Assert.assertEquals(allResume, resumes);
     }
 
     @Test

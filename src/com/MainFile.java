@@ -1,10 +1,9 @@
 package com;
 
-import com.google.gwt.thirdparty.guava.common.io.Closer;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainFile {
     public static void main(String[] args) throws IOException {
@@ -18,7 +17,7 @@ public class MainFile {
         //Список файлов в каталоге
         File dir = new File("./src/com/topjava/webapp/model");
         System.out.println(dir.isDirectory());
-        for (String name : dir.list()) {
+        for (String name : Objects.requireNonNull(dir.list())) {
             System.out.println(name);
         }
 
@@ -33,14 +32,19 @@ public class MainFile {
             throw new RuntimeException(e);
         }
 
-        //try-with-resources in google guava(class Closer)
-        Closer closer = Closer.create();
-        try {
-            FileInputStream fileInputStream = closer.register(new FileInputStream("file"));
-        } catch (Throwable e) {
-            throw closer.rethrow(e);
-        } finally {
-            closer.close();
+        File projectFile = new File("../basejava");
+        printAllFiles(projectFile);
+    }
+
+    private static void printAllFiles(File file) {
+        File[] folders = file.listFiles();
+        for (File entry : Objects.requireNonNull(folders)) {
+            if (entry.isDirectory()) {
+                System.out.println(entry.getName());
+                printAllFiles(entry);
+                continue;
+            }
+            System.out.println("   |" + entry.getName());
         }
     }
 }

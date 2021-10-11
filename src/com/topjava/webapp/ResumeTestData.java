@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResumeTestData {
-    public Resume createResume(String uuid, String fullName) {
+    public static Resume createResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
         resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
         resume.setContact(ContactType.SKYPE, "grigory.kislin");
@@ -34,23 +34,23 @@ public class ResumeTestData {
         qualifList.add("MySQL, SQLite, MS SQL, HSQLDB");
         resume.setSection(SectionType.QUALIFICATIONS, new ListSections(qualifList));
 
-        List<Experience> experienceList = new ArrayList<>();
-        experienceList.add(new Experience(new Link("Java Online Projects", "https://javaops.ru/"),
-                new Experience.ListExp(LocalDate.of(2013, 10, 1), LocalDate.now(), "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок.")));
-        experienceList.add(new Experience(new Link("Java Online Projects", "https://javaops.ru/"),
-                new Experience.ListExp(LocalDate.of(2010, 1, 1), LocalDate.of(2011, 9, 1), "Директор", "Управлние")));
-        experienceList.add(new Experience(new Link("Wrike", "https://www.wrike.com/"),
-                new Experience.ListExp(LocalDate.of(2014, 10, 1), LocalDate.of(2016, 1, 1), "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")));
-        resume.setSection(SectionType.EXPERIENCE, new Organization(experienceList));
+        List<Organization> organizationList = new ArrayList<>();
+        organizationList.add(new Organization(new Link("Java Online Projects", "https://javaops.ru/"),
+                new Organization.Experience(LocalDate.of(2013, 10, 1), LocalDate.now(), "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок.")));
+        organizationList.add(new Organization(new Link("Java Online Projects", "https://javaops.ru/"),
+                new Organization.Experience(LocalDate.of(2010, 1, 1), LocalDate.of(2011, 9, 1), "Директор", "Управлние")));
+        organizationList.add(new Organization(new Link("Wrike", "https://www.wrike.com/"),
+                new Organization.Experience(LocalDate.of(2014, 10, 1), LocalDate.of(2016, 1, 1), "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")));
+        resume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizationList));
 
-        List<Experience> educationList = new ArrayList<>();
-        educationList.add(new Experience(new Link("Coursera", "https://www.coursera.org/learn/scala-functional-programming"),
-                new Experience.ListExp(LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1), "\"Functional Programming Principles in Scala\" by Martin Odersky", "")));
-        educationList.add(new Experience(new Link("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
-                new Experience.ListExp(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", ""),
-                new Experience.ListExp(LocalDate.of(2016, 12, 1), LocalDate.now(), "Tester", "Hello world"),
-                new Experience.ListExp(LocalDate.of(2015, 4, 13), LocalDate.of(2015, 6, 29), "Manager", "buying/selling")));
-        resume.setSection(SectionType.EDUCATION, new Organization(educationList));
+        List<Organization> educationList = new ArrayList<>();
+        educationList.add(new Organization(new Link("Coursera", "https://www.coursera.org/learn/scala-functional-programming"),
+                new Organization.Experience(LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1), "\"Functional Programming Principles in Scala\" by Martin Odersky", "")));
+        educationList.add(new Organization(new Link("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
+                new Organization.Experience(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", ""),
+                new Organization.Experience(LocalDate.of(2016, 12, 1), LocalDate.now(), "Tester", "Hello world"),
+                new Organization.Experience(LocalDate.of(2015, 4, 13), LocalDate.of(2015, 6, 29), "Manager", "buying/selling")));
+        resume.setSection(SectionType.EDUCATION, new OrganizationSection(educationList));
 
         System.out.println(resume);
         System.out.println(resume.getContacts());
