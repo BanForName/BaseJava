@@ -15,12 +15,12 @@ public class MainFile {
             e.printStackTrace();
         }
 
-        //Список файлов в каталоге
+        // Список файлов в каталоге
         File dir = new File("./src/com/topjava/webapp/model");
         System.out.println(dir.isDirectory());
         Arrays.stream(Objects.requireNonNull(dir.list())).forEach(System.out::println);
 
-        //try-with-resources
+        // try-with-resources
         try (FileInputStream fis = new FileInputStream(file)) {
             System.out.println(fis.read());
             int c;
@@ -28,21 +28,23 @@ public class MainFile {
                 System.out.print((char) c);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("error", e);
         }
 
-        File projectFile = new File("../basejava");
+        File projectFile = new File("../baseJava");
         printAllFiles(projectFile);
     }
 
     private static void printAllFiles(File file) {
         // рекурсивнй обход дерева каталогов
         File[] folders = file.listFiles();
-        Arrays.stream(Objects.requireNonNull(folders)).forEach(entry -> {
+        for (File entry : Objects.requireNonNull(folders)) {
             if (entry.isDirectory()) {
-                System.out.println(entry);
+                System.out.println(entry.getName());
                 printAllFiles(entry);
+                continue;
             }
-        });
+            System.out.println("   |" + entry.getName());
+        }
     }
 }
