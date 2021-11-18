@@ -1,7 +1,8 @@
-package com.topjava.webapp.storage;
+package com.topjava.webapp.storage.fileStorage;
 
 import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
+import com.topjava.webapp.storage.AbstractStorage;
 
 import java.io.File;
 import java.io.IOException;

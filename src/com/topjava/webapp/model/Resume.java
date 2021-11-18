@@ -37,7 +37,7 @@ public class Resume implements Comparable<Resume> {
         return sections;
     }
 
-    public Map<ContactType, String> getContacts() {
+    public Map<ContactType,  String> getContacts() {
         return contacts;
     }
 

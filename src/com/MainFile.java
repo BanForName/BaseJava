@@ -3,6 +3,7 @@ package com;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class MainFile {
@@ -17,12 +18,10 @@ public class MainFile {
         //Список файлов в каталоге
         File dir = new File("./src/com/topjava/webapp/model");
         System.out.println(dir.isDirectory());
-        for (String name : Objects.requireNonNull(dir.list())) {
-            System.out.println(name);
-        }
+        Arrays.stream(Objects.requireNonNull(dir.list())).forEach(System.out::println);
 
         //try-with-resources
-        try (FileInputStream fis = new FileInputStream(file);) {
+        try (FileInputStream fis = new FileInputStream(file)) {
             System.out.println(fis.read());
             int c;
             while ((c = fis.read()) != -1) {
@@ -37,14 +36,13 @@ public class MainFile {
     }
 
     private static void printAllFiles(File file) {
+        // рекурсивнй обход дерева каталогов
         File[] folders = file.listFiles();
-        for (File entry : Objects.requireNonNull(folders)) {
+        Arrays.stream(Objects.requireNonNull(folders)).forEach(entry -> {
             if (entry.isDirectory()) {
-                System.out.println(entry.getName());
+                System.out.println(entry);
                 printAllFiles(entry);
-                continue;
             }
-            System.out.println("   |" + entry.getName());
-        }
+        });
     }
 }
