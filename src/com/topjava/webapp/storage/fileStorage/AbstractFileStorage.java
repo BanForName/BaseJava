@@ -45,18 +45,16 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected Resume getResume(File file) {
-        Resume resume;
         try {
-            resume = resumeRead(file);
+            return resumeRead(file);
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
-        return resume;
     }
 
     @Override
     protected void deleteResume(File file) {
-        file.delete();
+        if (!file.delete()) throw  new StorageException("File delete error", file.getName());
     }
 
     @Override

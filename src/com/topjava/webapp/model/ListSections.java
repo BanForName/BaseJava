@@ -1,11 +1,15 @@
 package com.topjava.webapp.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class ListSections extends AbstractSection {
-    private List<String> list = new ArrayList<>();
+    private List<String> list;
+
+    public ListSections(String... list) {
+        this(Arrays.asList(list));
+    }
 
     public ListSections(List<String> list) {
         Objects.requireNonNull(list, "textList must not be null");

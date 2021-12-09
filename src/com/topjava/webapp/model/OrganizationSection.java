@@ -1,24 +1,28 @@
 package com.topjava.webapp.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class OrganizationSection extends AbstractSection {
-    private List<Organization> sectionsList = new ArrayList<>();
+    private List<Organization> organizations;
 
-    public OrganizationSection(List<Organization> sectionsList) {
-        Objects.requireNonNull(sectionsList, " must be not null");
-        this.sectionsList = sectionsList;
+    public OrganizationSection(Organization... organizations) {
+        this(Arrays.asList(organizations));
     }
 
-    public List<Organization> getSectionsList() {
-        return sectionsList;
+    public OrganizationSection(List<Organization> organizations) {
+        Objects.requireNonNull(organizations, " must be not null");
+        this.organizations = organizations;
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizations;
     }
 
     @Override
     public String toString() {
-        return sectionsList.toString();
+        return organizations.toString();
     }
 
     @Override
@@ -26,11 +30,11 @@ public class OrganizationSection extends AbstractSection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrganizationSection that = (OrganizationSection) o;
-        return sectionsList.equals(that.sectionsList);
+        return organizations.equals(that.organizations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sectionsList);
+        return Objects.hash(organizations);
     }
 }

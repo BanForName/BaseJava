@@ -40,11 +40,11 @@ public class MainFile {
         File[] folders = file.listFiles();
         for (File entry : Objects.requireNonNull(folders)) {
             if (entry.isDirectory()) {
-                System.out.println(entry.getName());
+                System.out.println("Directory | " + entry.getName());
                 printAllFiles(entry);
                 continue;
             }
-            System.out.println("   |" + entry.getName());
+            System.out.println("File |" + entry.getName());
         }
     }
 }
