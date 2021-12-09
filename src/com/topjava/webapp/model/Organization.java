@@ -1,6 +1,10 @@
 package com.topjava.webapp.model;
 
+import static com.topjava.webapp.util.DateUtil.of;
+import static com.topjava.webapp.util.DateUtil.NOW;
+
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +17,11 @@ public class Organization {
         Objects.requireNonNull(link, " must be not null");
         this.link = link;
         this.exp = Arrays.asList(exp);
+    }
+
+    public Organization(Link link, List<Experience> exp) {
+        this.link = link;
+        this.exp = exp;
     }
 
     public Link getLink() {
@@ -43,6 +52,14 @@ public class Organization {
         private final LocalDate endDate;
         private final String title;
         private final String text;
+
+        public Experience(int startYear, Month startMonth, String title, String description) {
+            this(of(startYear, startMonth), NOW, title, description);
+        }
+
+        public Experience(int startYear, Month startMonth, int endYEar, Month endMonth, String title, String description) {
+            this(of(startYear, startMonth), of(endYEar, endMonth), title, description);
+        }
 
         public Experience(LocalDate startDate, LocalDate endDate, String title, String text) {
             Objects.requireNonNull(startDate, " must be not null");
