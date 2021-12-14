@@ -1,17 +1,21 @@
 package com.topjava.webapp.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Initial resume class
  */
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     // Unique identifier
     private final String uuid;
     private final String fullName;
-    private Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
-    private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
 
 
     public Resume(String fullName) {
@@ -37,7 +41,7 @@ public class Resume implements Comparable<Resume> {
         return sections;
     }
 
-    public Map<ContactType,  String> getContacts() {
+    public Map<ContactType, String> getContacts() {
         return contacts;
     }
 

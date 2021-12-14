@@ -3,13 +3,18 @@ package com.topjava.webapp.model;
 import static com.topjava.webapp.util.DateUtil.of;
 import static com.topjava.webapp.util.DateUtil.NOW;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Organization {
+public class Organization implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final Link link;
     private final List<Experience> exp;
 
@@ -47,7 +52,10 @@ public class Organization {
         return Objects.hash(link, exp);
     }
 
-    public static class Experience {
+    public static class Experience implements Serializable {
+        @Serial
+        private static final long serialVersionUID = 1L;
+
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final String title;
@@ -57,8 +65,8 @@ public class Organization {
             this(of(startYear, startMonth), NOW, title, description);
         }
 
-        public Experience(int startYear, Month startMonth, int endYEar, Month endMonth, String title, String description) {
-            this(of(startYear, startMonth), of(endYEar, endMonth), title, description);
+        public Experience(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+            this(of(startYear, startMonth), of(endYear, endMonth), title, description);
         }
 
         public Experience(LocalDate startDate, LocalDate endDate, String title, String text) {

@@ -1,5 +1,7 @@
 package com.topjava.webapp.model;
 
+import java.io.Serializable;
+
 public enum ContactType {
     PHONE("Телефон"),
     SKYPE("SKYPE"),

@@ -4,14 +4,14 @@ import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractFileStorage extends AbstractStorage<File> {
-    private File directory;
+    private final File directory;
 
     public AbstractFileStorage(File directory) {
         Objects.requireNonNull(directory + " must not be null");
@@ -27,7 +27,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void updateResume(Resume resume, File file) {
         try {
-            resumeWrite(resume, file);
+            resumeWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -37,7 +37,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected void saveResume(Resume resume, File file) {
         try {
             file.createNewFile();
-            resumeWrite(resume, file);
+            resumeWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -46,7 +46,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Resume getResume(File file) {
         try {
-            return resumeRead(file);
+            return resumeRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -76,11 +76,11 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> list = new LinkedList<>();
+    public List<Resume> allSortedResume() {
+        List<Resume> list = new ArrayList<>();
         for (File files : Objects.requireNonNull(directory.listFiles())) {
             try {
-                list.add(resumeRead(files));
+                list.add(resumeRead(new BufferedInputStream(new FileInputStream(files))));
             } catch (IOException e) {
                 throw new StorageException("IO error", files.getName(), e);
             }
@@ -93,7 +93,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         return Objects.requireNonNull(directory.listFiles()).length;
     }
 
-    protected abstract void resumeWrite(Resume resume, File file) throws IOException;
+    protected abstract void resumeWrite(Resume resume, OutputStream os) throws IOException;
 
-    protected abstract Resume resumeRead(File file) throws IOException;
+    protected abstract Resume resumeRead(InputStream is) throws IOException;
 }

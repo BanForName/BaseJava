@@ -1,11 +1,15 @@
 package com.topjava.webapp.model;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class ListSections extends AbstractSection {
-    private List<String> list;
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    private final List<String> list;
 
     public ListSections(String... list) {
         this(Arrays.asList(list));
