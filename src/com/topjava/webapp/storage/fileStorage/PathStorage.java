@@ -3,6 +3,7 @@ package com.topjava.webapp.storage.fileStorage;
 import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
+import com.topjava.webapp.storage.fileStorage.serialization.ObjectSerialization;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -12,21 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractPathStorage extends AbstractStorage<Path> {
+public class PathStorage extends AbstractStorage<Path> {
     private final Path directory;
+    private final ObjectSerialization serialization;
 
-    protected AbstractPathStorage(String dir) {
+    public PathStorage(String dir, ObjectSerialization serialization) {
         directory = Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + "is not directory or is not writable");
         }
+        this.serialization = serialization;
     }
 
     @Override
     protected void updateResume(Resume resume, Path path) {
         try {
-            resumeWrite(resume, Files.newOutputStream(path));
+            serialization.resumeWrite(resume, Files.newOutputStream(path));
         } catch (IOException e) {
             throw new StorageException("unable to create a file", resume.getUuid(), e);
         }
@@ -36,7 +39,7 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     protected void saveResume(Resume resume, Path path) {
         try {
             Files.createFile(path);
-            resumeWrite(resume, Files.newOutputStream(path));
+            serialization.resumeWrite(resume, Files.newOutputStream(path));
         } catch (IOException e) {
             throw new StorageException("unable to create a file", resume.getUuid(), e);
         }
@@ -45,7 +48,7 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     @Override
     protected Resume getResume(Path path) {
         try {
-            return resumeRead(Files.newInputStream(path));
+            return serialization.resumeRead(Files.newInputStream(path));
         } catch (IOException e) {
             throw new StorageException("unable to read the file" + path.getFileName(), null, e);
         }
@@ -73,13 +76,17 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     @Override
     protected List<Resume> allSortedResume() {
         List<Resume> list = new ArrayList<>();
-        directory.forEach(file -> {
-            try {
-                list.add(resumeRead(Files.newInputStream(file)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        try {
+            Files.list(directory).forEach(file -> {
+                try {
+                    list.add(serialization.resumeRead(Files.newInputStream(file)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 
@@ -100,8 +107,4 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
             throw new StorageException("no such file", null, e);
         }
     }
-
-    protected abstract void resumeWrite(Resume resume, OutputStream os) throws IOException;
-
-    protected abstract Resume resumeRead(InputStream is) throws IOException;
 }

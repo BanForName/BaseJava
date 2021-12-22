@@ -3,7 +3,6 @@ package com.topjava.webapp.model;
 import static com.topjava.webapp.util.DateUtil.of;
 import static com.topjava.webapp.util.DateUtil.NOW;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Organization implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private final Link link;
@@ -53,7 +51,6 @@ public class Organization implements Serializable {
     }
 
     public static class Experience implements Serializable {
-        @Serial
         private static final long serialVersionUID = 1L;
 
         private final LocalDate startDate;

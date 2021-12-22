@@ -32,19 +32,19 @@ public class MainFile {
         }
 
         File projectFile = new File("../baseJava");
-        printAllFiles(projectFile);
+        printAllFiles(projectFile, "");
     }
 
-    private static void printAllFiles(File file) {
+    private static void printAllFiles(File file, String indent) {
         // рекурсивнй обход дерева каталогов
         File[] folders = file.listFiles();
         for (File entry : Objects.requireNonNull(folders)) {
             if (entry.isDirectory()) {
-                System.out.println("Directory | " + entry.getName());
-                printAllFiles(entry);
+                System.out.println(indent + "Directory | " + entry.getName());
+                printAllFiles(entry, indent + "     ");
                 continue;
             }
-            System.out.println("File |" + entry.getName());
+            System.out.println(indent + "File |" + entry.getName());
         }
     }
 }

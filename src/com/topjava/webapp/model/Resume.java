@@ -1,6 +1,5 @@
 package com.topjava.webapp.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
@@ -8,7 +7,6 @@ import java.util.*;
  * Initial resume class
  */
 public class Resume implements Comparable<Resume>, Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     // Unique identifier
