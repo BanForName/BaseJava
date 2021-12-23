@@ -3,7 +3,7 @@ package com.topjava.webapp.storage.fileStorage;
 import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
-import com.topjava.webapp.storage.fileStorage.serialization.StreamSerialization;
+import com.topjava.webapp.storage.fileStorage.serialization.Serialization;
 
 import java.io.*;
 import java.util.Arrays;
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 public class FileStorage extends AbstractStorage<File> {
     private final File directory;
-    private final StreamSerialization serialization;
+    private final Serialization serialization;
 
-    public FileStorage(File directory, StreamSerialization serialization) {
+    public FileStorage(File directory, Serialization serialization) {
         Objects.requireNonNull(directory + " must not be null");
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");

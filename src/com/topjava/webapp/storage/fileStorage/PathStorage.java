@@ -3,7 +3,7 @@ package com.topjava.webapp.storage.fileStorage;
 import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.AbstractStorage;
-import com.topjava.webapp.storage.fileStorage.serialization.StreamSerialization;
+import com.topjava.webapp.storage.fileStorage.serialization.Serialization;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -16,9 +16,9 @@ import java.util.stream.Stream;
 
 public class PathStorage extends AbstractStorage<Path> {
     private final Path directory;
-    private final StreamSerialization serialization;
+    private final Serialization serialization;
 
-    public PathStorage(String dir, StreamSerialization serialization) {
+    public PathStorage(String dir, Serialization serialization) {
         directory = Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
