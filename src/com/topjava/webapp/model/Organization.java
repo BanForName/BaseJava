@@ -56,7 +56,7 @@ public class Organization implements Serializable {
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final String title;
-        private final String text;
+        private final String description;
 
         public Experience(int startYear, Month startMonth, String title, String description) {
             this(of(startYear, startMonth), NOW, title, description);
@@ -66,14 +66,14 @@ public class Organization implements Serializable {
             this(of(startYear, startMonth), of(endYear, endMonth), title, description);
         }
 
-        public Experience(LocalDate startDate, LocalDate endDate, String title, String text) {
+        public Experience(LocalDate startDate, LocalDate endDate, String title, String description) {
             Objects.requireNonNull(startDate, " must be not null");
             Objects.requireNonNull(endDate, " must be not null");
             Objects.requireNonNull(title, " must be not null");
             this.startDate = startDate;
             this.endDate = endDate;
             this.title = title;
-            this.text = text;
+            this.description = description;
         }
 
         public LocalDate getStartDate() {
@@ -89,12 +89,12 @@ public class Organization implements Serializable {
         }
 
         public String getText() {
-            return text;
+            return description;
         }
 
         @Override
         public String toString() {
-            return "\n" + startDate + " - " + endDate + "  " + title + "\n" + text;
+            return "\n" + startDate + " - " + endDate + "  " + title + "\n" + description;
         }
 
         @Override
@@ -105,12 +105,12 @@ public class Organization implements Serializable {
             return Objects.equals(startDate, that.startDate) &&
                     Objects.equals(endDate, that.endDate) &&
                     Objects.equals(title, that.title) &&
-                    text.equals(that.text);
+                    description.equals(that.description);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(startDate, endDate, title, text);
+            return Objects.hash(startDate, endDate, title, description);
         }
     }
 }
