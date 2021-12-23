@@ -1,18 +1,21 @@
-package com.topjava.webapp.storage;
+package com.topjava.webapp.storage.fileStorage;
 
 import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
+import com.topjava.webapp.storage.AbstractStorage;
+import com.topjava.webapp.storage.fileStorage.serialization.Serialization;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedList;
+import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
-    private File directory;
+public class FileStorage extends AbstractStorage<File> {
+    private final File directory;
+    private final Serialization serialization;
 
-    public AbstractFileStorage(File directory) {
+    public FileStorage(File directory, Serialization serialization) {
         Objects.requireNonNull(directory + " must not be null");
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
@@ -21,12 +24,13 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         }
         this.directory = directory;
+        this.serialization = serialization;
     }
 
     @Override
     protected void updateResume(Resume resume, File file) {
         try {
-            resumeWrite(resume, file);
+            serialization.resumeWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
@@ -36,26 +40,24 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected void saveResume(Resume resume, File file) {
         try {
             file.createNewFile();
-            resumeWrite(resume, file);
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
+        updateResume(resume, file);
     }
 
     @Override
     protected Resume getResume(File file) {
-        Resume resume;
         try {
-            resume = resumeRead(file);
+            return serialization.resumeRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error", file.getName(), e);
         }
-        return resume;
     }
 
     @Override
     protected void deleteResume(File file) {
-        file.delete();
+        if (!file.delete()) throw new StorageException("File delete error", file.getName());
     }
 
     @Override
@@ -70,31 +72,26 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public void clear() {
-        File[] folder = directory.listFiles();
-        for (File entry : Objects.requireNonNull(folder)) {
-            entry.delete();
+        for (File file : fileList()) {
+            deleteResume(file);
         }
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> list = new LinkedList<>();
-        for (File files : Objects.requireNonNull(directory.listFiles())) {
-            try {
-                list.add(resumeRead(files));
-            } catch (IOException e) {
-                throw new StorageException("IO error", files.getName(), e);
-            }
-        }
-        return list;
+    public List<Resume> allSortedResume() {
+        return Arrays.stream(fileList()).map(this::getResume).collect(Collectors.toList());
     }
 
     @Override
     public int size() {
-        return Objects.requireNonNull(directory.listFiles()).length;
+        return fileList().length;
     }
 
-    protected abstract void resumeWrite(Resume resume, File file) throws IOException;
-
-    protected abstract Resume resumeRead(File file) throws IOException;
+    private File[] fileList() {
+        File[] files = directory.listFiles();
+        if (files == null) {
+            throw new StorageException("IO error", null);
+        }
+        return files;
+    }
 }

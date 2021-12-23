@@ -1,13 +1,19 @@
 package com.topjava.webapp.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class ListSections extends AbstractSection {
-    private List<String> list = new ArrayList<>();
+public class ListSection extends AbstractSection {
+    private static final long serialVersionUID = 1L;
 
-    public ListSections(List<String> list) {
+    private final List<String> list;
+
+    public ListSection(String... list) {
+        this(Arrays.asList(list));
+    }
+
+    public ListSection(List<String> list) {
         Objects.requireNonNull(list, "textList must not be null");
         this.list = list;
     }
@@ -25,7 +31,7 @@ public class ListSections extends AbstractSection {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ListSections that = (ListSections) o;
+        ListSection that = (ListSection) o;
         return list.equals(that.list);
     }
 

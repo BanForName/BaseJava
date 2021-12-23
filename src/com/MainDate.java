@@ -1,9 +1,7 @@
 package com;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,5 +27,29 @@ public class MainDate {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YY/MM/dd");
         System.out.println(dtf.format(ldt));
+
+        // java.time.Duration представляет собой промежуток,
+        // основанный на времени (часы, минуты, секунды, наносекунды).
+        // Его можно создать либо напрямую, либо вывести в качестве разности между другими типами:
+
+        Duration sixHours = Duration.ofHours(6);
+        System.out.println(sixHours);
+
+        LocalDateTime lhs = LocalDateTime.of(2020, 12, 15, 22, 23);
+        LocalDateTime rhs = LocalDateTime.of(2021, 1, 1, 12, 45, 18);
+
+        Duration different = Duration.between(lhs, rhs);
+        System.out.println(different);
+
+        // java.time.Period двойник Duration, только не на основе промежутка времени, а на основе даты (года, месяца, дня).
+        Period threeQuartes = Period.ofMonths(9);
+        System.out.println(threeQuartes);
+
+        LocalDate firstDate = LocalDate.of(2020, 7, 12);
+        LocalDate secDate = LocalDate.of(2021, 1, 1);
+
+        Period diff = Period.between(firstDate, secDate);
+        System.out.println(diff);
+
     }
 }

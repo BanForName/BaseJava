@@ -21,13 +21,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     public void updateResume(Resume resume, Integer searchKey) {
-        storage[(int) searchKey] = resume;
+        storage[searchKey] = resume;
     }
 
     @Override
     public void saveResume(Resume resume, Integer searchKey) {
         if (size != STORAGE_LIMIT) {
-            insertElement(resume, (int) searchKey);
+            insertElement(resume, searchKey);
             size++;
         } else {
             throw new StorageException("Хранилище переполнено", resume.getUuid());
@@ -36,18 +36,18 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     public Resume getResume(Integer searchKey) {
-        return storage[(int) searchKey];
+        return storage[searchKey];
     }
 
     @Override
     public void deleteResume(Integer searchKey) {
-        int indx = (int) searchKey;
+        int indx = searchKey;
         size--;
         if (size - indx >= 0) System.arraycopy(storage, indx + 1, storage, indx, size - indx);
     }
 
     @Override
-    public List<Resume> getAllSorted() {;
+    public List<Resume> allSortedResume() {
         return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 
@@ -58,7 +58,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected boolean isExist(Integer index) {
-        return (int) index >= 0;
+        return index >= 0;
     }
 
     protected abstract Integer getKey(String uuid);

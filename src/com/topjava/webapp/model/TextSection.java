@@ -2,10 +2,12 @@ package com.topjava.webapp.model;
 
 import java.util.Objects;
 
-public class TextSections extends AbstractSection {
+public class TextSection extends AbstractSection {
+    private static final long serialVersionUID = 1L;
+
     private final String text;
 
-    public TextSections(String text) {
+    public TextSection(String text) {
         Objects.requireNonNull(text, "text must be not null");
         this.text = text;
     }
@@ -23,7 +25,7 @@ public class TextSections extends AbstractSection {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TextSections that = (TextSections) o;
+        TextSection that = (TextSection) o;
         return text.equals(that.text);
     }
 

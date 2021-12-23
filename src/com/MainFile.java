@@ -3,6 +3,7 @@ package com;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class MainFile {
@@ -14,37 +15,36 @@ public class MainFile {
             e.printStackTrace();
         }
 
-        //Список файлов в каталоге
+        // Список файлов в каталоге
         File dir = new File("./src/com/topjava/webapp/model");
         System.out.println(dir.isDirectory());
-        for (String name : Objects.requireNonNull(dir.list())) {
-            System.out.println(name);
-        }
+        Arrays.stream(Objects.requireNonNull(dir.list())).forEach(System.out::println);
 
-        //try-with-resources
-        try (FileInputStream fis = new FileInputStream(file);) {
+        // try-with-resources
+        try (FileInputStream fis = new FileInputStream(file)) {
             System.out.println(fis.read());
             int c;
             while ((c = fis.read()) != -1) {
                 System.out.print((char) c);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("error", e);
         }
 
-        File projectFile = new File("../basejava");
-        printAllFiles(projectFile);
+        File projectFile = new File("../baseJava");
+        printAllFiles(projectFile, "");
     }
 
-    private static void printAllFiles(File file) {
+    private static void printAllFiles(File file, String indent) {
+        // рекурсивнй обход дерева каталогов
         File[] folders = file.listFiles();
         for (File entry : Objects.requireNonNull(folders)) {
             if (entry.isDirectory()) {
-                System.out.println(entry.getName());
-                printAllFiles(entry);
+                System.out.println(indent + "Directory | " + entry.getName());
+                printAllFiles(entry, indent + "     ");
                 continue;
             }
-            System.out.println("   |" + entry.getName());
+            System.out.println(indent + "File |" + entry.getName());
         }
     }
 }

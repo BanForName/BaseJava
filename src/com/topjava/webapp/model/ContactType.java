@@ -1,5 +1,7 @@
 package com.topjava.webapp.model;
 
+import java.io.Serializable;
+
 public enum ContactType {
     PHONE("Телефон"),
     SKYPE("SKYPE"),
@@ -9,7 +11,7 @@ public enum ContactType {
     STACKOVERFLOW("Профиль Stackoverflow"),
     HOMEPAGE("Домашняя страница");
 
-    private String title;
+    private final String title;
 
     ContactType(String title) {
         this.title = title;
