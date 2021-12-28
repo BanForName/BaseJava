@@ -41,6 +41,10 @@ public class Organization implements Serializable {
         return link;
     }
 
+    public List<Experience> getPositions() {
+        return exp;
+    }
+
     @Override
     public String toString() {
         return "\n" + link + "\n" + exp;
