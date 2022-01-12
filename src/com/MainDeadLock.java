@@ -5,48 +5,29 @@ public class MainDeadLock {
     private static Object objectLock2 = new Object();
 
     public static void main(String[] args) {
-        Thread1 th1 = new Thread1();
-        Thread2 th2 = new Thread2();
-        th1.start();
-        th2.start();
+        lockObject(objectLock1, objectLock2);
+        lockObject(objectLock2, objectLock1);
     }
 
-    private static class Thread1 extends Thread {
-        private static int count;
+    private static void lockObject(Object lock1, Object lock2) {
+        new Thread() {
+            @Override
+            public void run() {
+                System.out.println(lock1);
+                synchronized (lock1) {
+                    System.out.println("lock object 1 " + lock1);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(lock2);
 
-        @Override
-        public void run() {
-            synchronized (objectLock1) {
-                for (int i = 0; i < 10_000; i++) {
-                    counter();
+                    synchronized (lock2) {
+                        System.out.println("lock object 2 " + lock2);
+                    }
                 }
             }
-        }
-        public static void counter() {
-            synchronized (objectLock2) {
-                count++;
-                System.out.println(count);
-            }
-        }
-    }
-
-    private static class Thread2 extends Thread {
-        private static int count;
-
-        @Override
-        public void run() {
-            synchronized (objectLock2) {
-                for (int i = 0; i < 10_000; i++) {
-                    counter();
-                }
-            }
-        }
-
-        public static void counter() {
-            synchronized (objectLock1) {
-                count++;
-                System.out.println(count);
-            }
-        }
+        }.start();
     }
 }
