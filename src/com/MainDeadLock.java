@@ -11,20 +11,27 @@ public class MainDeadLock {
 
     private static void lockObject(Object lock1, Object lock2) {
         new Thread(() -> {
-            System.out.println(lock1);
+            tryholdingMessage(lock1);
             synchronized (lock1) {
-                System.out.println("lock object 1 " + lock1);
+                holdingMessage(lock1);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(lock2);
-
+                tryholdingMessage(lock2);
                 synchronized (lock2) {
-                    System.out.println("lock object 2 " + lock2);
+                    holdingMessage(lock2);
                 }
             }
         }).start();
+    }
+
+    private static void holdingMessage(Object lock) {
+        System.out.println(Thread.currentThread().getName() + " захватил " + lock);
+    }
+
+    private static void tryholdingMessage(Object lock) {
+        System.out.println(Thread.currentThread().getName() + " пытается захватить " + lock);
     }
 }
