@@ -11,7 +11,7 @@ public class MainDeadLock {
 
     private static void lockObject(Object lock1, Object lock2) {
         new Thread(() -> {
-            tryholdingMessage(lock1);
+            tryHoldingMessage(lock1);
             synchronized (lock1) {
                 holdingMessage(lock1);
                 try {
@@ -19,7 +19,7 @@ public class MainDeadLock {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                tryholdingMessage(lock2);
+                tryHoldingMessage(lock2);
                 synchronized (lock2) {
                     holdingMessage(lock2);
                 }
@@ -31,7 +31,7 @@ public class MainDeadLock {
         System.out.println(Thread.currentThread().getName() + " захватил " + lock);
     }
 
-    private static void tryholdingMessage(Object lock) {
+    private static void tryHoldingMessage(Object lock) {
         System.out.println(Thread.currentThread().getName() + " пытается захватить " + lock);
     }
 }
