@@ -1,5 +1,11 @@
 package com.topjava.webapp.model;
 
+import com.topjava.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import static com.topjava.webapp.util.DateUtil.of;
 import static com.topjava.webapp.util.DateUtil.NOW;
 
@@ -10,11 +16,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final Link link;
-    private final List<Experience> exp;
+    private Link link;
+    private List<Experience> exp;
+
+    public Organization() {
+    }
 
     public Organization(Link link, Experience... exp) {
         Objects.requireNonNull(link, " must be not null");
@@ -29,6 +39,10 @@ public class Organization implements Serializable {
 
     public Link getLink() {
         return link;
+    }
+
+    public List<Experience> getPositions() {
+        return exp;
     }
 
     @Override
@@ -50,13 +64,19 @@ public class Organization implements Serializable {
         return Objects.hash(link, exp);
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Experience implements Serializable {
         private static final long serialVersionUID = 1L;
 
-        private final LocalDate startDate;
-        private final LocalDate endDate;
-        private final String title;
-        private final String description;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
+        private LocalDate endDate;
+        private String title;
+        private String description;
+
+        public Experience() {
+        }
 
         public Experience(int startYear, Month startMonth, String title, String description) {
             this(of(startYear, startMonth), NOW, title, description);
