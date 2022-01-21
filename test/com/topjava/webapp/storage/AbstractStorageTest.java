@@ -1,5 +1,6 @@
 package com.topjava.webapp.storage;
 
+import com.Config;
 import com.topjava.webapp.ResumeTestData;
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractStorageTest {
-    protected static final File STORAGE_DIR = new File("/home/jd/TopJava/baseJava/src/storage");
+    protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected final Storage storage;
 
@@ -56,7 +57,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
-        storage.update(resume4);
+        storage.get("dummy");
     }
 
     @Test
