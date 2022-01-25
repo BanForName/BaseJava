@@ -38,7 +38,6 @@ public class SqlStorage implements Storage {
             ps.setString(1, r.getUuid());
             ps.setString(2, r.getFullName());
             return ps.execute();
-
         });
     }
 
