@@ -1,7 +1,6 @@
 package com.topjava.webapp.storage;
 
 import com.Config;
-import com.topjava.webapp.ResumeTestData;
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
 import com.topjava.webapp.model.Resume;
@@ -57,7 +56,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() {
-        storage.get("dummy");
+        storage.update(resume4);
     }
 
     @Test
@@ -94,6 +93,11 @@ public abstract class AbstractStorageTest {
         storage.delete(UUID_1);
         storage.get(UUID_1);
         Assert.assertEquals(2, storage.size());
+    }
+
+    @Test(expected = NotExistStorageException.class)
+    public void deleteNotExist() {
+        storage.delete(resume4.getUuid());
     }
 
     @Test

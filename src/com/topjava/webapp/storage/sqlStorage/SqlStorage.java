@@ -2,7 +2,6 @@ package com.topjava.webapp.storage.sqlStorage;
 
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
-import com.topjava.webapp.exception.StorageException;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.sql.SqlHelper;
 import com.topjava.webapp.storage.Storage;
@@ -28,6 +27,7 @@ public class SqlStorage implements Storage {
         sqlHelper.execute("UPDATE resume SET full_name = ? WHERE uuid = ?", ps -> {
             ps.setString(1, r.getFullName());
             ps.setString(2, r.getUuid());
+            if (ps.executeUpdate() == 0) throw new NotExistStorageException(r.getUuid());
             return ps.executeUpdate();
         });
     }
@@ -55,6 +55,7 @@ public class SqlStorage implements Storage {
     public void delete(String uuid) {
         sqlHelper.execute("DELETE FROM resume WHERE uuid = ?", ps -> {
             ps.setString(1, uuid);
+            if (ps.executeUpdate() == 0) throw new NotExistStorageException(uuid);
             return ps.execute();
         });
     }
@@ -62,7 +63,7 @@ public class SqlStorage implements Storage {
     @Override
     public List<Resume> getAllSorted() {
         List<Resume> list = new ArrayList<>();
-        return sqlHelper.execute("SELECT * FROM resume r ORDER BY full_name", ps -> {
+        return sqlHelper.execute("SELECT * FROM resume r ORDER BY uuid, full_name", ps -> {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 String uuid = resultSet.getString("uuid");
