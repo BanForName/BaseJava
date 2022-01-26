@@ -1,6 +1,7 @@
 package com.topjava.webapp.storage;
 
 import com.Config;
+import com.topjava.webapp.ResumeTestData;
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
 import com.topjava.webapp.model.Resume;
@@ -11,23 +12,24 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class AbstractStorageTest {
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
     protected final Storage storage;
 
-    private static final String UUID_1 = "UUID_1";
-    private final Resume resume1 = new Resume(UUID_1, "Bilbo beggins");
+    private static final String UUID_1 = UUID.randomUUID().toString();
+    private final Resume resume1 = ResumeTestData.createResume(UUID_1, "Bilbo beggins");
 
-    private static final String UUID_2 = "UUID_2";
-    private final Resume resume2 = new Resume(UUID_2, "John Catcher");
+    private static final String UUID_2 = UUID.randomUUID().toString();
+    private final Resume resume2 = ResumeTestData.createResume(UUID_2, "John Catcher");
 
-    private static final String UUID_3 = "UUID_3";
-    private final Resume resume3 = new Resume(UUID_3, "Tom Carter");
+    private static final String UUID_3 = UUID.randomUUID().toString();
+    private final Resume resume3 = ResumeTestData.createResume(UUID_3, "Tom Carter");
 
-    private static final String UUID_4 = "UUID_4";
-    private final Resume resume4 = new Resume(UUID_4, "Robert Wield");
+    private static final String UUID_4 = UUID.randomUUID().toString();
+    private final Resume resume4 = ResumeTestData.createResume(UUID_4, "Robert Wield");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
