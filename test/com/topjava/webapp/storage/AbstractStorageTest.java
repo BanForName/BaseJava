@@ -1,9 +1,9 @@
 package com.topjava.webapp.storage;
 
 import com.Config;
-import com.topjava.webapp.ResumeTestData;
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;
+import com.topjava.webapp.model.ContactType;
 import com.topjava.webapp.model.Resume;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,19 +20,37 @@ public abstract class AbstractStorageTest {
     protected final Storage storage;
 
     private static final String UUID_1 = UUID.randomUUID().toString();
-    private final Resume resume1 = ResumeTestData.createResume(UUID_1, "Bilbo beggins");
+    private final Resume resume1 = new Resume(UUID_1, "Bilbo beggins");
 
     private static final String UUID_2 = UUID.randomUUID().toString();
-    private final Resume resume2 = ResumeTestData.createResume(UUID_2, "John Catcher");
+    private final Resume resume2 = new Resume(UUID_2, "John Catcher");
 
     private static final String UUID_3 = UUID.randomUUID().toString();
-    private final Resume resume3 = ResumeTestData.createResume(UUID_3, "Tom Carter");
+    private final Resume resume3 = new Resume(UUID_3, "Tom Carter");
 
     private static final String UUID_4 = UUID.randomUUID().toString();
-    private final Resume resume4 = ResumeTestData.createResume(UUID_4, "Robert Wield");
+    private final Resume resume4 = new Resume(UUID_4, "Robert Wield");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
+    }
+
+    {
+        resume1.setContact(ContactType.PHONE, "89273413");
+        resume1.setContact(ContactType.EMAIL, "bilbo_b@mail.com");
+        resume1.setContact(ContactType.GITHUB, "bilbo-b");
+
+        resume2.setContact(ContactType.PHONE, "892465413");
+        resume2.setContact(ContactType.EMAIL, "john_c@mail.com");
+        resume2.setContact(ContactType.GITHUB, "john-c");
+
+        resume3.setContact(ContactType.PHONE, "78913465");
+        resume3.setContact(ContactType.EMAIL, "tom-c@mail.com");
+        resume3.setContact(ContactType.GITHUB, "tom-c");
+
+        resume4.setContact(ContactType.PHONE, "78918665");
+        resume4.setContact(ContactType.EMAIL, "robert-w@mail.com");
+        resume4.setContact(ContactType.GITHUB, "robert-w");
     }
 
     @Before
@@ -52,6 +70,9 @@ public abstract class AbstractStorageTest {
     @Test
     public void update() {
         Resume resume5 = new Resume(UUID_1, "TOMMY");
+        resume5.setContact(ContactType.PHONE, "7513146");
+        resume5.setContact(ContactType.EMAIL, "tommmy@mail.com");
+        resume5.setContact(ContactType.GITHUB, "tommmy");
         storage.update(resume5);
         Assert.assertEquals(resume5, storage.get(UUID_1));
     }
