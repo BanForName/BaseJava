@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResumeTestData {
+
     public static Resume createResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
-//        resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
-//        resume.setContact(ContactType.SKYPE, "grigory.kislin");
-//        resume.setContact(ContactType.EMAIL, "gkislin@yandex.ru");
-//        resume.setContact(ContactType.LINKEDIN, new Link("Профиль LinkedIn", "https://www.linkedin.com/in/gkislin").getUrl());
-//        resume.setContact(ContactType.GITHUB, new Link("Профиль Github", "https://github.com/gkislin").getUrl());
-//        resume.setContact(ContactType.STACKOVERFLOW, new Link("Профиль Stackoverflow", "https://stackoverflow.com/users/548473/grigory-kislin").getUrl());
-//        resume.setContact(ContactType.HOMEPAGE, new Link("Домашняя страница", "http://gkislin.ru/").getUrl());
+
+        resume.setContact(ContactType.LINKEDIN, new Link("Профиль LinkedIn", "https://www.linkedin.com/in/gkislin").getUrl());
+        resume.setContact(ContactType.GITHUB, new Link("Профиль Github", "https://github.com/gkislin").getUrl());
+        resume.setContact(ContactType.STACKOVERFLOW, new Link("Профиль Stackoverflow", "https://stackoverflow.com/users/548473/grigory-kislin").getUrl());
+        resume.setContact(ContactType.HOMEPAGE, new Link("Домашняя страница", "http://gkislin.ru/").getUrl());
 //
 //        resume.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
 //        resume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
