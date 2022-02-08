@@ -24,14 +24,14 @@ public class SqlStorage implements Storage {
     @Override
     public void update(Resume r) {
         sqlHelper.transactionalExecute(connection -> {
+            String uuid = r.getUuid();
             try (PreparedStatement ps = connection.prepareStatement("UPDATE resume SET full_name = ? WHERE uuid = ?")) {
-                String uuid = r.getUuid();
                 ps.setString(1, r.getFullName());
                 ps.setString(2, uuid);
                 if (ps.executeUpdate() == 0) throw new NotExistStorageException(uuid);
                 ps.executeUpdate();
             }
-            deleteContacts(connection, r.getUuid());
+            deleteContacts(connection, uuid);
             saveContacts(connection, r);
             return null;
         });
