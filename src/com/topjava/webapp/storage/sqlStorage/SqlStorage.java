@@ -78,23 +78,19 @@ public class SqlStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        return sqlHelper.execute("SELECT * FROM resume r" +
-                " LEFT JOIN contact c" +
-                " ON r.uuid = c.resume_uuid" +
-                " ORDER BY full_name, uuid", ps -> {
-            ResultSet resultSet = ps.executeQuery();
-            Map<String, Resume> map = new LinkedHashMap<>();
-            while (resultSet.next()) {
-                String uuid = resultSet.getString("uuid");
-                String fullName = resultSet.getString("full_name");
-                Resume resume = map.get(uuid);
-                if (resume == null) {
-                    resume = new Resume(uuid, fullName);
-                    map.put(uuid, resume);
+        return sqlHelper.transactionalExecute(connection -> {
+            Map<String, Resume> resumeMap = new LinkedHashMap<>();
+            try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM resume r ORDER BY full_name, uuid")) {
+                ResultSet resultSet = ps.executeQuery();
+                while (resultSet.next()) {
+                    String uuid = resultSet.getString("uuid");
+                    String fullName = resultSet.getString("full_name");
+                    resumeMap.put(uuid, new Resume(uuid, fullName));
                 }
-                addContact(resume, resultSet);
             }
-            return new ArrayList<>(map.values());
+
+            getContacts(connection, resumeMap);
+            return new ArrayList<>(resumeMap.values());
         });
     }
 
@@ -123,6 +119,16 @@ public class SqlStorage implements Storage {
                 ps.addBatch();
             }
             ps.executeBatch();
+        }
+    }
+
+    private void getContacts(Connection connection, Map<String, Resume> resumeMap) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * from contact ORDER BY resume_uuid")) {
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Resume resume = resumeMap.get(resultSet.getString("resume_uuid"));
+                addContact(resume, resultSet);
+            }
         }
     }
 
