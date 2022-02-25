@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.Writer;
 
-@WebServlet("/resume")
+//@WebServlet("/resume")
 public class ResumeServlet extends HttpServlet {
     private Storage storage;
 
