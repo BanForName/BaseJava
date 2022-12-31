@@ -49,7 +49,6 @@ public class ResumeServlet extends HttpServlet {
         writer.write("</table>" +
                         "</body>" +
                 "</html>");
-
     }
 
     @Override
