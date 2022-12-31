@@ -1,8 +1,10 @@
 package com.topjava.webapp;
 
 import com.topjava.webapp.model.*;
+import com.topjava.webapp.util.DateUtil;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +37,20 @@ public class ResumeTestData {
 
         List<Organization> organizationList = new ArrayList<>();
         organizationList.add(new Organization(new Link("Java Online Projects", "https://javaops.ru/"),
-                new Organization.Experience(LocalDate.of(2013, 10, 1), LocalDate.now(), "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок.")));
+                new Organization.Experience(DateUtil.of(2013, Month.OCTOBER), DateUtil.NOW, "Автор проекта", "Создание, организация и проведение Java онлайн проектов и стажировок.")));
         organizationList.add(new Organization(new Link("Java Online Projects", "https://javaops.ru/"),
-                new Organization.Experience(LocalDate.of(2010, 1, 1), LocalDate.of(2011, 9, 1), "Директор", "Управлние")));
+                new Organization.Experience(DateUtil.of(2010, Month.JANUARY), DateUtil.of(2011, Month.SEPTEMBER), "Директор", "Управлние")));
         organizationList.add(new Organization(new Link("Wrike", "https://www.wrike.com/"),
-                new Organization.Experience(LocalDate.of(2014, 10, 1), LocalDate.of(2016, 1, 1), "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")));
+                new Organization.Experience(DateUtil.of(2014, Month.OCTOBER), DateUtil.of(2016, Month.JANUARY), "Старший разработчик (backend)", "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")));
         resume.setSection(SectionType.EXPERIENCE, new OrganizationSection(organizationList));
 
         List<Organization> educationList = new ArrayList<>();
         educationList.add(new Organization(new Link("Coursera", "https://www.coursera.org/learn/scala-functional-programming"),
-                new Organization.Experience(LocalDate.of(2013, 3, 1), LocalDate.of(2013, 5, 1), "\"Functional Programming Principles in Scala\" by Martin Odersky", "")));
+                new Organization.Experience(DateUtil.of(2013, Month.MARCH), DateUtil.of(2013, Month.MAY), "\"Functional Programming Principles in Scala\" by Martin Odersky", "")));
         educationList.add(new Organization(new Link("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"),
-                new Organization.Experience(LocalDate.of(2011, 3, 1), LocalDate.of(2011, 4, 1), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", ""),
-                new Organization.Experience(LocalDate.of(2016, 12, 1), LocalDate.now(), "Tester", "Hello world"),
-                new Organization.Experience(LocalDate.of(2015, 4, 13), LocalDate.of(2015, 6, 29), "Manager", "buying/selling")));
+                new Organization.Experience(DateUtil.of(2011, Month.MARCH), DateUtil.of(2011, Month.MARCH), "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.", ""),
+                new Organization.Experience(DateUtil.of(2016, Month.DECEMBER), DateUtil.NOW, "Tester", "Hello world"),
+                new Organization.Experience(DateUtil.of(2015, Month.APRIL), DateUtil.of(2015, Month.JUNE), "Manager", "buying/selling")));
         resume.setSection(SectionType.EDUCATION, new OrganizationSection(educationList));
         return resume;
     }

@@ -4,20 +4,20 @@ import com.topjava.webapp.storage.Storage;
 import com.topjava.webapp.storage.sqlStorage.SqlStorage;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Properties;
 
 public class Config {
-    private static final File PROPS = new File("./config/resumes.properties");
+    private static final File PROPS = new File("D:\\Java projects\\BaseJava\\config\\resumes.properties");
     private static final Config INSTANCE = new Config();
 
     private final File storageDir;
     private final Storage storage;
 
     private Config() {
-        try (InputStream is = new FileInputStream(PROPS)) {
+        try (InputStream is = Files.newInputStream(PROPS.toPath())) {
             Properties props = new Properties();
             props.load(is);
             storageDir = new File(props.getProperty("storage.dir"));

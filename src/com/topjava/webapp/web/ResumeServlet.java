@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.Writer;
 
+
 //@WebServlet("/resume")
 public class ResumeServlet extends HttpServlet {
     private Storage storage;
@@ -26,8 +27,8 @@ public class ResumeServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 //        response.setHeader("Content-type", "text/html; charset=UTF-8");
-//        String name = request.getParameter("name");
-//        response.getWriter().write(name == null ? "<h1>Hello world!</h1>" : "Hello " + name);
+        String name = request.getParameter("name");
+        response.getWriter().write(name == null ? "<h1>Hello world!</h1>" : "Hello " + name);
         Writer writer = response.getWriter();
         writer.write(
                 "<html>" +
@@ -36,7 +37,7 @@ public class ResumeServlet extends HttpServlet {
                         "</head>" +
                         "<body>" +
                         "   <table border='1'>" +
-                        "        <tr>" +
+                        "       <tr>" +
                         "           <th>uuid</th>" +
                         "           <th>full name</th>" +
                         "       </tr>");
@@ -55,4 +56,6 @@ public class ResumeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
+
 }
