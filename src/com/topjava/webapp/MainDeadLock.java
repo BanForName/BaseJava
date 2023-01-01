@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 public class MainDeadLock {
     private static final Object objectLock1 = new Object();

@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 // Lazy singleton double checked locking
 public class LazySingleton {
