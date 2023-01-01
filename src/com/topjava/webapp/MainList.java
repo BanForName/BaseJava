@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.listStorage.ListStorage;

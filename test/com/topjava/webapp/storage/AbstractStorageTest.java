@@ -1,6 +1,6 @@
 package com.topjava.webapp.storage;
 
-import com.Config;
+import com.topjava.webapp.Config;
 import com.topjava.webapp.ResumeTestData;
 import com.topjava.webapp.exception.ExistStorageException;
 import com.topjava.webapp.exception.NotExistStorageException;

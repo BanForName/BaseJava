@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 import java.util.Calendar;
 import java.util.TimeZone;

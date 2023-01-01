@@ -1,6 +1,6 @@
 package com.topjava.webapp.storage;
 
-import com.Config;
+import com.topjava.webapp.Config;
 
 public class SqlStorageTest extends AbstractStorageTest {
 

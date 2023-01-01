@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 import java.io.File;
 import java.io.FileInputStream;

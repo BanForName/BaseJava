@@ -6,10 +6,12 @@ import com.topjava.webapp.model.AbstractSection;
 
 import java.io.Reader;
 import java.io.Writer;
+import java.time.LocalDate;
 
 public class JsonParser {
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(AbstractSection.class, new JsonSectionAdapter<>())
+            .registerTypeAdapter(LocalDate.class, new GsonLocalDateTime())
             .create();
 
     public static <T> T read(Reader reader, Class<T> clazz) {
@@ -24,7 +26,7 @@ public class JsonParser {
         return GSON.toJson(object, clazz);
     }
 
-    public static AbstractSection read(String value, Class<AbstractSection> abstractSectionClass) {
-        return GSON.fromJson(value, abstractSectionClass);
+    public static <T> T read(String value, Class<T> clazz) {
+        return GSON.fromJson(value, clazz);
     }
 }

@@ -1,4 +1,4 @@
-package com;
+package com.topjava.webapp;
 
 import com.topjava.webapp.model.Resume;
 

@@ -1,6 +1,6 @@
 package com.topjava.webapp.web;
 
-import com.Config;
+import com.topjava.webapp.Config;
 import com.topjava.webapp.model.Resume;
 import com.topjava.webapp.storage.Storage;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 
-//@WebServlet("/resume")
+@WebServlet(urlPatterns = "/resume", name = "ResumeServlet")
 public class ResumeServlet extends HttpServlet {
     private Storage storage;
 
