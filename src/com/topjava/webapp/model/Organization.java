@@ -5,10 +5,6 @@ import com.topjava.webapp.util.LocalDateAdapter;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import static com.topjava.webapp.util.DateUtil.of;
-import static com.topjava.webapp.util.DateUtil.NOW;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -16,14 +12,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static com.topjava.webapp.util.DateUtil.NOW;
+import static com.topjava.webapp.util.DateUtil.of;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final Organization EMPTY = new Organization("", "", Experience.EMPTY);
 
     private Link link;
     private List<Experience> exp;
 
     public Organization() {
+    }
+
+    public Organization(String name, String url, Experience... experiences) {
+        this(new Link(name, url), Arrays.asList(experiences));
     }
 
     public Organization(Link link, Experience... exp) {
@@ -67,6 +71,7 @@ public class Organization implements Serializable {
     @XmlAccessorType(XmlAccessType.FIELD)
     public static class Experience implements Serializable {
         private static final long serialVersionUID = 1L;
+        public static final Experience EMPTY = new Experience();
 
         @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate;
